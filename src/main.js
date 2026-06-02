@@ -30,12 +30,15 @@ function fetchEmail(form_container) {
   return new Email(name, subject, email, message);
 }
 
+
 // Handle form submission
 
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // prevent default form submission behavior
+
+  form.classList.add('submitted');      
 
   const emailData = fetchEmail(form);
 

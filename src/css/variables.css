@@ -1,0 +1,41 @@
+/* Local Bodoni 72 — renders on macOS, falls back to Playfair Italic elsewhere */
+@font-face {
+  font-family: "Bodoni 72 Book";
+  src: local("Bodoni 72 Book Italic");
+  font-weight: 400;
+  font-style: italic;
+}
+
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #12121a;
+  --bg-input: #1a1a2e;
+  --border: #2a2a3e;
+
+  --text: #f0f0f5;
+  --text-muted: #8888a0;
+
+  --accent: #00d9ff;
+  --accent-hover: #00a2ff;
+
+  --font: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-italic: "Bodoni 72 Book", "Playfair Display", Georgia, serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 3rem;
+
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease-in-out;
+}
