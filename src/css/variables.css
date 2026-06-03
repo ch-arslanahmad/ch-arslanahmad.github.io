@@ -9,10 +9,12 @@
 :root {
   --bg: #0a0a0f;
   --bg-card: #12121a;
-  --bg-input: #1a1a2e;
+  --bg-surface: #1a1a2e;
   --border: #2a2a3e;
 
+  --text-surface-muted: #9da0c4;
   --text: #f0f0f5;
+  --text-muted-light: #c9c9d1;
   --text-muted: #8888a0;
 
   --accent: #00d9ff;

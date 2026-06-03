@@ -1,3 +1,29 @@
+// if on desktop sidebar is open by default, but on mobile it's closed by default, and can be toggled by the menu button.
+
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("nav");
+
+function syncNavToViewport() {
+  if (!menuToggle || !nav) return;
+
+  const isDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
+  menuToggle.classList.toggle("is-open", isDesktop);
+  menuToggle.setAttribute("aria-pressed", String(isDesktop));
+  nav.classList.toggle("closed", !isDesktop);
+}
+
+document.addEventListener("DOMContentLoaded", syncNavToViewport);
+window.addEventListener("resize", syncNavToViewport);
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = menuToggle.classList.toggle("is-open");
+    menuToggle.setAttribute("aria-pressed", String(isOpen));
+    nav.classList.toggle("closed");
+  });
+}
+
+
 // this will link all the JS modules.
 
 // Get input field values (what user typed)
@@ -47,3 +73,5 @@ form.addEventListener("submit", (e) => {
 
   // todo: allow functionality to actually send email to you
 });
+
+

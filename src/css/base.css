@@ -5,6 +5,17 @@
   outline: none;
 }
 
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow: none;
+}
+
+body {
+  margin: 0;
+}
+
 body {
   font-family: var(--font);
   font-size: var(--text-base);
@@ -25,20 +36,51 @@ h6 {
   text-transform: lowercase;
 }
 
-h1 { font-size: var(--text-3xl); }
-h2 { font-size: var(--text-2xl); }
-h3 { font-size: var(--text-xl); }
+h1 {
+  font-size: var(--text-3xl);
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+a {
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  color: var(--text-muted);
+}
+
+a:hover,
+a:active {
+  color: var(--text);
+  text-shadow:
+    0 0 15px var(--text),
+    0 0 1px var(--text);
+}
+
+a.active {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+a.active:hover,
+a.active:focus {
+  color: var(--text);
+  text-shadow: none;
+}
 
 button {
   padding: var(--space-sm) var(--space-md);
-  clip-path: polygon(
-    0 0,
-    calc(100% - 10px) 0,
-    100% 10px,
-    100% 100%,
-    10px 100%,
-    0 calc(100% - 10px)
-  );
+  clip-path: polygon(0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px));
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
   font-family: var(--font);
   background: var(--accent);
@@ -67,15 +109,13 @@ label {
 
 input,
 textarea {
-  background: var(--bg-input);
-  clip-path: polygon(
-    0 0,
-    calc(100% - 10px) 0,
-    100% 10px,
-    100% 100%,
-    10px 100%,
-    0 calc(100% - 10px)
-  );
+  background: var(--bg-surface);
+  clip-path: polygon(0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px));
   border: 1px solid var(--border);
   padding: var(--space-sm) var(--space-md);
   color: var(--text-muted);
@@ -87,17 +127,14 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-
   border-bottom: 2px solid var(--accent);
   font-weight: 100;
   color: var(--text);
 }
 
-form.submitted input:not(:focus):invalid,
+form.submitted input:invalid,
 form.submitted textarea:invalid {
   outline: none;
-  border: none;
-
   border-bottom: 2px solid red;
   color: white;
 }
@@ -107,7 +144,46 @@ textarea:valid {
   border-bottom: 2px solid green;
 }
 
-section {
+main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+nav {
+  position: relative;
+  align-items: center;
+  background-color: var(--bg-surface);
+  flex-shrink: 0;
+  width: 230px;
+  min-width: 0;
+  transition: all 0.3s ease;
+}
+
+nav.closed {
+  margin-left: -200px;
+}
+
+nav ul li a {
+  color: var(--text-surface-muted)
+}
+
+section,
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
   padding: var(--space-lg) var(--space-xl);
   border-bottom: 1px solid var(--border);
+}
+
+main>section {
+  flex: 1;
+}
+
+nav li {
+  list-style: none;
+  font-size: 25px;
+  font-family: var(--font-italic);
+  text-transform: lowercase;
 }
