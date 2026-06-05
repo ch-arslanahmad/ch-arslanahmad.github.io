@@ -8,46 +8,80 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&family=JetBrains+Mono&display=swap"
     rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="src/style.css" />
 </head>
 
 <body>
   <main>
 
-    <nav>
-      <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-pressed="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="logo"><img src="src/assets/logo.png" alt="Logo" /></div>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-pressed="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#projects">Showcase</a></li>
-        <li><a class="active" href="#contact">Contact</a></li>
-      </ul>
+    <nav>
+      <div class="menu">
+        <div class="logo"><img src="src/assets/logo.png" alt="Logo" /></div>
+
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projects">Showcase</a></li>
+          <li><a class="active" href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </nav>
 
     <section class="contact">
       <h1>Contact Me</h1>
-      <form id="contactForm" novalidate>
-        <label for="name">Name:</label>
-        <input id="name" name="name" type="text" required />
 
-        <label for="email">Email:</label>
-        <input id="email" name="email" type="email" required />
+      <div class="sections-list">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="2b80c1da-faf3-4bfc-b4c3-8d636675ebc3">
+          <input type="checkbox" name="botcheck" style="display: none;">
 
-        <label for="subject">Subject:</label>
-        <input id="subject" name="subject" type="text" required />
+          <label for="name">Name:</label>
+          <input id="name" name="name" type="text" required />
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+          <label for="email">Email:</label>
+          <input id="email" name="email" type="email" required />
 
-        <button type="submit">Send Message</button>
-      </form>
+          <label for="subject">Subject:</label>
+          <input id="subject" name="subject" type="text" required />
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+
+        <div class="card-list">
+          <section class="card">
+            <i class="fa-regular fa-envelope-open accent"></i>
+            <a class="link" href="mailto:ch.arslanad+portfolio@gmail.com">ch.arslanad@gmail.com</a>
+          </section>
+
+          <section class="card">
+            <h2>Socials</h2>
+            <div>
+              <button type="button" aria-label="GitHub"
+                onclick="window.open('https://github.com/ch-arslanahmad','_blank')">
+                <i class="fa-brands fa-github"></i>
+              </button>
+              <button type="button" aria-label="LinkedIn"
+                onclick="window.open('https://www.linkedin.com/in/arslan-ahmad-bb8149377/','_blank')">
+                <i class="fa-brands fa-linkedin"></i>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
     </section>
   </main>
 

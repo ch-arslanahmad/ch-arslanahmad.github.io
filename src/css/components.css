@@ -10,7 +10,7 @@ nav ul.nav-links {
 .menu-toggle {
   position: absolute;
   top: var(--space-md);
-  right: var(--space-md);
+  left: var(--space-md);
   z-index: 10;
   display: inline-flex;
   flex-direction: column;
@@ -67,18 +67,16 @@ nav ul.nav-links {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* move the nav button when its closed, so it remains visible & clickable */
-nav.closed button.menu-toggle {
-  right: -20px;
-}
-
 /* == Button TOGGLE CODE FINISHED == */
+
+.logo {
+  justify-self: center;
+}
 
 .logo img {
   width: var(--text-3xl);
   padding: 10px;
   background: var(--accent);
-
   clip-path: polygon(0 0,
       calc(100% - 10px) 0,
       100% 10px,
@@ -91,5 +89,112 @@ form#contactForm {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  max-width: 400px;
+}
+
+/* == Toast Notifications == */
+
+.toast {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  max-width: 360px;
+  max-height: 80px;
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--text-sm);
+  z-index: 999;
+  transform: translateX(120%);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  align-content: center;
+}
+
+.toast.toast-visible {
+  transform: translateX(0);
+}
+
+.toast-sending,
+.toast-success,
+.toast-error {
+  clip-path: polygon(0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px));
+}
+
+.toast-sending {
+  background: var(--bg-surface);
+  border: solid var(--border);
+  border-width: 0 0 0 5px;
+  color: var(--text-muted);
+}
+
+.toast-success {
+  background: #052e16;
+  border: solid #4ade80;
+  border-width: 0 0 0 5px;
+  color: #4ade80;
+}
+
+.toast-error {
+  background: #2e0505;
+  border: solid #f87171;
+  border-width: 0 0 0 5px;
+  color: #f87171;
+}
+
+.toast-error a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.toast-error a:hover {
+  color: var(--accent-hover);
+}
+
+.sections-list {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  clip-path: polygon(0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px));
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  border: solid var(--border);
+  border-width: 0 0 0 5px;
+  transition: all var(--transition-normal);
+  padding: var(--space-lg);
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+.card i {
+  font-size: var(--text-2xl);
+}
+
+.card a {
+  font-size: 19px;
+  font-family: var(--font-italic);
+  font-style: italic;
 }

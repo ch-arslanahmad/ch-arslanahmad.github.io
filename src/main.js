@@ -1,77 +1,110 @@
-// if on desktop sidebar is open by default, but on mobile it's closed by default, and can be toggled by the menu button.
+// Default: open on desktop (≥768px, ≥500px height), closed on mobile.
+// Manual click overrides auto-behavior until breakpoint is crossed.
 
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("nav");
 
-function syncNavToViewport() {
+let prevScreenIsDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
+let navOverridden = false;
+
+function autoSyncNavToScreenSize() {
   if (!menuToggle || !nav) return;
 
-  const isDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
-  menuToggle.classList.toggle("is-open", isDesktop);
-  menuToggle.setAttribute("aria-pressed", String(isDesktop));
-  nav.classList.toggle("closed", !isDesktop);
+  const nowDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
+
+  if (nowDesktop !== prevScreenIsDesktop) {
+    prevScreenIsDesktop = nowDesktop;
+    navOverridden = false;
+  }
+
+  if (!navOverridden) {
+    menuToggle.classList.toggle("is-open", nowDesktop);
+    nav.classList.toggle("closed", !nowDesktop);
+  }
 }
 
-document.addEventListener("DOMContentLoaded", syncNavToViewport);
-window.addEventListener("resize", syncNavToViewport);
+document.addEventListener("DOMContentLoaded", autoSyncNavToScreenSize);
+window.addEventListener("resize", autoSyncNavToScreenSize);
 
 if (menuToggle) {
   menuToggle.addEventListener("click", () => {
-    const isOpen = menuToggle.classList.toggle("is-open");
-    menuToggle.setAttribute("aria-pressed", String(isOpen));
+    navOverridden = true;
+    menuToggle.classList.toggle("is-open");
     nav.classList.toggle("closed");
   });
 }
 
 
-// this will link all the JS modules.
+// Handle form submission via Web3Forms
 
-// Get input field values (what user typed)
+function showToast(msg, type) {
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = msg;
 
-class Email {
-  constructor(name, subject, email, message) {
-    this.name = name;
-    this.subject = subject;
-    this.email = email;
-    this.message = message;
+  toast.addEventListener("click", () => toast.remove());
+
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add("toast-visible"));
+
+  if (type === "success") {
+    setTimeout(() => {
+      toast.classList.remove("toast-visible");
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
   }
 }
 
-// this will recive the form container
-function fetchEmail(form_container) {
-  
-  const inputs = form_container.querySelectorAll("#contactForm input");
-  const message_contaner = form_container.querySelector("#contactForm textarea");
-
-  let name, subject, email, message;
-
-  inputs.forEach((input) => {
-    if (input.id === "name") name = input.value;
-    if (input.id === "subject") subject = input.value;
-    if (input.id === "email") email = input.value;
-  });
-
-  message = message_contaner.value;
-
-  return new Email(name, subject, email, message);
-}
-
-
-// Handle form submission
+// Expose for console testing
+window.showToast = showToast;
 
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); // prevent default form submission behavior
-
-  form.classList.add('submitted');      
-
-  const emailData = fetchEmail(form);
-
-  // For demonstration, we'll just log the email data to the console
-  console.log("Email Data:", emailData);
-
-  // todo: allow functionality to actually send email to you
-});
 
 
+async function handleSubmit(e) {
+  e.preventDefault();
+  form.classList.add("submitted");
+
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+
+  showToast("Sending...", "sending");
+
+
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    });
+    
+    document.querySelectorAll(".toast-sending").forEach((t) => t.remove());
+
+    // if response not ok
+    if (!res.ok) {
+      showToast('Unexpected error. Please try again later or <a href="mailto:ch.arslanad+portfolio@gmail.com">Email me directly</a>', "error");
+      return;
+    }
+    showToast("Message sent! I'll get back to you soon.", "success");
+    form.reset();
+    form.classList.remove("submitted");
+    
+  }
+  catch (error) {
+    document.querySelectorAll(".toast-sending").forEach((t) => t.remove());
+    showToast(
+      'Network error. <a href="mailto:ch.arslanad+portfolio@gmail.com">Email me directly</a>',
+      "error"
+    );
+  }
+}
+// if form exists
+
+if (form) {
+}

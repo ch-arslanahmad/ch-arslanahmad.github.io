@@ -9,7 +9,7 @@ html,
 body {
   width: 100%;
   min-height: 100%;
-  overflow: none;
+  overflow-x: hidden;
 }
 
 body {
@@ -54,6 +54,10 @@ a {
   color: var(--text-muted);
 }
 
+i {
+  background: transparent;
+}
+
 a:hover,
 a:active {
   color: var(--text);
@@ -68,7 +72,9 @@ a.active {
 }
 
 a.active:hover,
-a.active:focus {
+a.active:focus,
+a.link:hover,
+a.link:focus {
   color: var(--text);
   text-shadow: none;
 }
@@ -82,11 +88,13 @@ button {
       10px 100%,
       0 calc(100% - 10px));
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  color: black;
   font-family: var(--font);
   background: var(--accent);
   border: none;
   transition: all var(--transition-normal);
 }
+
 
 button:hover,
 button:focus {
@@ -148,6 +156,7 @@ main {
   display: flex;
   flex-direction: row;
   width: 100%;
+  position: relative;
 }
 
 nav {
@@ -177,13 +186,13 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 
-main>section {
-  flex: 1;
-}
-
 nav li {
   list-style: none;
   font-size: 25px;
   font-family: var(--font-italic);
   text-transform: lowercase;
+}
+
+.accent {
+  color: var(--accent)
 }
