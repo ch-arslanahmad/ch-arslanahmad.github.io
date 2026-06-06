@@ -37,22 +37,26 @@ if (menuToggle) {
 
 // Handle form submission via Web3Forms
 
-function showToast(msg, type) {
+function dismissToast(toast) {
+  toast.classList.remove("show");
+  setTimeout(() => toast.remove(), 300);
+}
+
+function showToast(msg, type, noAutoDismiss = false) {
   const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
+  toast.className = `toast ${type}`;
   toast.innerHTML = msg;
 
-  toast.addEventListener("click", () => toast.remove());
+  toast.addEventListener("click", () => dismissToast(toast));
 
   document.body.appendChild(toast);
-
-  requestAnimationFrame(() => toast.classList.add("toast-visible"));
-
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => toast.classList.add("show"));
+  });
   if (type === "success") {
-    setTimeout(() => {
-      toast.classList.remove("toast-visible");
-      setTimeout(() => toast.remove(), 300);
-    }, 4000);
+    if (!noAutoDismiss) {
+      setTimeout(() => dismissToast(toast), 4000);
+    }
   }
 }
 
@@ -84,7 +88,7 @@ async function handleSubmit(e) {
       body: json
     });
     
-    document.querySelectorAll(".toast-sending").forEach((t) => t.remove());
+    document.querySelectorAll(".toast.sending").forEach((t) => t.remove());
 
     // if response not ok
     if (!res.ok) {
@@ -97,7 +101,7 @@ async function handleSubmit(e) {
     
   }
   catch (error) {
-    document.querySelectorAll(".toast-sending").forEach((t) => t.remove());
+    document.querySelectorAll(".toast.sending").forEach((t) => t.remove());
     showToast(
       'Network error. <a href="mailto:ch.arslanad+portfolio@gmail.com">Email me directly</a>',
       "error"
@@ -107,4 +111,51 @@ async function handleSubmit(e) {
 // if form exists
 
 if (form) {
+  form.addEventListener("submit", handleSubmit);
 }
+
+
+// Nav section switching
+
+const homeSection = document.getElementById("home");
+const contactSection = document.getElementById("contact");
+// add more sections
+const navLinks = document.querySelectorAll(".nav-links a");
+
+function switchSection(targetId) {
+  homeSection.classList.toggle("hidden", targetId !== "home");
+  contactSection.classList.toggle("hidden", targetId !== "contact");
+  navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${targetId}`));
+  console.log("switchSection", targetId + " is", "hidden:", contactSection.classList.contains("hidden"));
+
+  if (window.innerWidth < 768) {
+    menuToggle.classList.remove("is-open");
+    nav.classList.add("closed");
+  }
+}
+
+navLinks.forEach((a) => {
+  a.addEventListener("click", (e) => {
+    const id = a.getAttribute("href").slice(1); // get attribute & removing the #
+    if (id === "home" || id === "contact") {
+      e.preventDefault();
+      switchSection(id);
+    }
+  });
+});
+
+
+// time
+const timeElement = document.querySelector(".date");
+
+function getTime() {
+  const time = new Date();
+  timeElement.textContent = time.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true
+  }) + ',' + time.getFullYear();
+}
+
+setInterval(getTime, 1000);

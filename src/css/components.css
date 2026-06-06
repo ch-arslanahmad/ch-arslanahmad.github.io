@@ -96,26 +96,27 @@ form#contactForm {
 .toast {
   position: fixed;
   bottom: var(--space-lg);
-  right: var(--space-lg);
+  /* right: var(--space-xl); */
   max-width: 360px;
   max-height: 80px;
+  right: var(--space-lg);
   padding: var(--space-md) var(--space-lg);
   font-size: var(--text-sm);
   z-index: 999;
-  transform: translateX(120%);
-  transition: transform 0.3s ease;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   align-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(120%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.toast.toast-visible {
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  right: var(--space-lg);
   transform: translateX(0);
-}
-
-.toast-sending,
-.toast-success,
-.toast-error {
   clip-path: polygon(0 0,
       calc(100% - 10px) 0,
       100% 10px,
@@ -124,34 +125,41 @@ form#contactForm {
       0 calc(100% - 10px));
 }
 
-.toast-sending {
+
+.toast.sending {
   background: var(--bg-surface);
   border: solid var(--border);
   border-width: 0 0 0 5px;
   color: var(--text-muted);
 }
 
-.toast-success {
+.toast.success {
   background: #052e16;
   border: solid #4ade80;
   border-width: 0 0 0 5px;
   color: #4ade80;
 }
 
-.toast-error {
+.toast.error {
   background: #2e0505;
   border: solid #f87171;
   border-width: 0 0 0 5px;
   color: #f87171;
 }
 
-.toast-error a {
+.toast.error a {
   color: var(--accent);
   text-decoration: underline;
 }
 
-.toast-error a:hover {
+.toast.error a:hover {
   color: var(--accent-hover);
+}
+
+.contact {
+  min-height: 100vh;
+  width: 100%;
+  border-bottom: none;
 }
 
 .sections-list {
@@ -161,7 +169,6 @@ form#contactForm {
   width: 100%;
 }
 
-
 .card-list {
   display: flex;
   flex-direction: column;
@@ -169,7 +176,7 @@ form#contactForm {
 }
 
 .card {
-  background: var(--bg-card);
+  background: rgba(18, 18, 26, 0.5);
   clip-path: polygon(0 0,
       calc(100% - 10px) 0,
       100% 10px,
@@ -197,4 +204,124 @@ form#contactForm {
   font-size: 19px;
   font-family: var(--font-italic);
   font-style: italic;
+}
+
+/* ==============================
+   Hero Section
+   ============================== */
+
+.home {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  border-bottom: none;
+  padding: var(--space-xl) var(--space-lg);
+  gap: var(--space-sm);
+}
+
+.home .hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.home h3 {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  margin-bottom: 0;
+}
+
+.home h1 {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-family: var(--font-italic);
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  width: max-content;
+}
+
+.home h1 span {
+  color: var(--accent);
+}
+
+
+.home .placeholder-array {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  color: var(--text-muted-light);
+  min-height: 1.6em;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 0.01em;
+  background: var(--accent);
+  animation: blink 1s step-start infinite;
+}
+
+
+p.date {
+  align-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+
+.home .hero-content>*,
+.contact>* {
+  opacity: 0;
+  filter: blur(20px);
+  animation: cinematicBlur 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0ms;
+}
+
+
+.home .hero-content>h3 {
+  animation-delay: 200ms;
+}
+
+.home .hero-content>h1 {
+  animation-delay: 500ms;
+}
+
+.home .hero-content>.placeholder-array {
+  animation-delay: 800ms;
+}
+
+
+/* Animations */
+
+@keyframes cinematicBlur {
+  0% {
+    opacity: 0;
+    filter: blur(20px);
+    transform: scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }

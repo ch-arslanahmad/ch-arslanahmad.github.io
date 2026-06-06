@@ -23,6 +23,10 @@
         z-index: 101;
     }
 
+    .home {
+        padding: var(--space-xl);
+    }
+
 }
 
 @media (max-width: 580px) {
@@ -34,5 +38,9 @@
 
     .sections-list {
         grid-template-columns: 1fr;
+    }
+
+    .home {
+        padding: var(--space-xl) var(--space-lg);
     }
 }
