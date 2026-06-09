@@ -74,7 +74,7 @@ nav ul.nav-links {
 }
 
 .logo img {
-  width: var(--text-3xl);
+  width: var(--text-2xl);
   padding: 10px;
   background: var(--accent);
   clip-path: polygon(0 0,
@@ -197,7 +197,7 @@ form#contactForm {
 }
 
 .card i {
-  font-size: var(--text-2xl);
+  font-size: var(--text-22xl);
 }
 
 .card a {
@@ -215,8 +215,11 @@ form#contactForm {
   width: 100%;
   position: relative;
   border-bottom: none;
-  padding: var(--space-xl) var(--space-lg);
-  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-md) 0 var(-- space-2xl);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-2xl);
 }
 
 .home .hero-content {
@@ -224,7 +227,8 @@ form#contactForm {
   flex-direction: column;
   gap: var(--space-sm);
   position: relative;
-  z-index: 1;
+  flex: 1;
+  /* min-width: 280px; */
 }
 
 .home h3 {
@@ -237,7 +241,7 @@ form#contactForm {
 }
 
 .home h1 {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
   font-family: var(--font-italic);
   color: var(--text);
   line-height: 1.1;
@@ -269,10 +273,11 @@ form#contactForm {
 
 
 p.date {
-  align-self: end;
+  width: 100%;
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   color: var(--text-muted);
+  text-align: right;
 }
 
 
@@ -297,6 +302,77 @@ p.date {
   animation-delay: 800ms;
 }
 
+
+.code-container {
+  flex: 1;
+  opacity: 0;
+  filter: blur(20px);
+  animation: cinematicBlur 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 1100ms;
+}
+
+@media (max-width: 768px) {
+  .code-container {
+    max-width: 100%;
+  }
+}
+
+.editor-body {
+  background: #1e1e2e;
+  border: 3px solid #2a2a3eb7;
+  border-radius: 8px;
+  max-width: 500px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.home .code-editor {
+  padding: 15px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: white;
+  overflow-x: auto;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* == Syntax Highlighting Colors (VS Code Dark) == */
+
+.c-kw {
+  color: #569CD6;
+}
+
+.c-str {
+  color: #CE9178;
+}
+
+.c-num {
+  color: #B5CEA8;
+}
+
+.c-comment {
+  color: #6A9955;
+}
+
+.c-default {
+  color: #D4D4D4;
+}
+
+.c-rand {
+  color: #808080;
+}
+
+.c-bracket {
+  color: #FFCB6B;
+}
+
+.c-func {
+  color: #DCDCAA;
+}
+
+.c-attr {
+  color: #9CDCFE;
+}
 
 /* Animations */
 

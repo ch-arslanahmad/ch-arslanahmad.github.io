@@ -7,7 +7,7 @@
         height: 100%;
         margin-left: 0;
         z-index: 100;
-        padding-top: calc(var(--space-xl) + var(--space-sm));
+        padding-top: calc(var(--space-2xl) + var(--space-sm));
         border-bottom: none;
         transform: translateX(0);
         transition: all 0.3s ease;
@@ -23,8 +23,8 @@
         z-index: 101;
     }
 
-    .home {
-        padding: var(--space-xl);
+    .code-container {
+        max-width: 100%;
     }
 
 }
@@ -41,6 +41,14 @@
     }
 
     .home {
-        padding: var(--space-xl) var(--space-lg);
+        padding-top: var(--space-xl);
+        padding-right: var(--space-md);
+        padding-bottom: var(--space-xl);
+        padding-left: var(--space-xl);
+    }
+
+    .home .editor-body {
+        width: 100%;
+        +
     }
 }

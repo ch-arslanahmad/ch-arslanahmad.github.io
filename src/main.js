@@ -3,6 +3,8 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("nav");
 
+let beforeDesktop;
+
 /**
  * Adjust nav/menu state with current screen size (open in Desktop, closed in mobile).
  * @returns {void}
@@ -11,9 +13,20 @@ function autoSyncNavToScreenSize() {
   if (!menuToggle || !nav) return;
 
   const nowDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
-  menuToggle.classList.toggle("is-open", nowDesktop); // close menu toggle on mobile, open on desktop
-  nav.classList.toggle("closed", !nowDesktop); // close nav on mobile, open on desktop
+
+  if (beforeDesktop === nowDesktop) return;
+  beforeDesktop = nowDesktop;
+
+  if (nowDesktop) {
+    menuToggle.classList.add("is-open");
+    nav.classList.remove("closed");
+  } else {
+    menuToggle.classList.remove("is-open");
+    nav.classList.add("closed");
+  }
 }
+
+
 
 document.addEventListener("DOMContentLoaded", autoSyncNavToScreenSize);
 window.addEventListener("resize", autoSyncNavToScreenSize);
@@ -174,3 +187,70 @@ function getTime() {
 }
 
 setInterval(getTime, 1000);
+
+
+
+// == Syntax Highlighting for Code Block ==
+
+/**
+ * Simple syntax highlighter that wraps matched tokens in span elements.
+ * @param {string} code - Source code to highlight.
+ * @returns {string} HTML string with syntax spans.
+ */
+function highlight(code) {
+
+  // regex to match all the code components
+  const commentGroup = /(\/\/.*$|\/\*[\s\S]*?\*\/)/;
+  const strGroup = /(".*?"|'.*?')/;
+  const numGroup = /(\b\d+\b)/;
+  const kwGroup = /\b(const|let|var|function|if|else|for|while|return|class|new|this)\b/;
+  const bracketStr = /([\[\]{}()])/g;
+  const opStr = /([.,;:=!<>?+\-*/&|])/g;
+  const funcStr = /(\b[a-zA-Z_]\w*\b)(?=\()/g;
+
+
+  // combine all regex
+  const combined = new RegExp(
+    `${commentGroup.source}|${strGroup.source}|${numGroup.source}|${kwGroup.source}|${bracketStr.source}|${opStr.source}|${funcStr.source}`,
+    'gm'
+  );
+
+  // return the code with edited HTML with span tags for each component
+
+  // code.replace(what_to_replace, how_to_replace) where 'how_to_replace' is a function but can be a string as well.
+  // arguments (match, group1, group2, ...): match is the entire matched string, while groupn is the returned string of the nth capturing group in the regex.
+  return code.replace(combined, (match, comment, str, num, kw, bracket, op, func) => {
+  // In our case, we have 7 groups,
+    // we check which matches and wrap it in the span tag with class.
+    // then stylize the span class to distinguish
+
+    if (comment) return `<span class="c-comment">${comment}</span>`;
+    if (str) return `<span class="c-str">${str}</span>`;
+    if (num) return `<span class="c-num">${num}</span>`;
+    if (kw) return `<span class="c-kw">${kw}</span>`;
+    if (bracket) return `<span class="c-bracket">${bracket}</span>`;
+    if (op) return `<span class="c-rand">${op}</span>`;
+    if (func) return `<span class="c-func">${func}</span>`;
+    // within the function, one match will be found and return for each match.
+    return match;
+  });
+}
+
+const heroCode = `const arslan = {
+  status: "building",
+  approach: "build it, break it, understand why",
+  stack: ["HTML", "CSS", "JS"],
+  skills: ["]
+  pretending_to_know: false
+};
+
+function buildSomething(idea) {
+  return idea + "✦";
+}`;
+
+const heroEditor = document.querySelector("#hero-code");
+if (heroEditor) {
+  heroEditor.innerHTML = highlight(heroCode);
+}
+
+showToast("Operation in progress", "success", true)
