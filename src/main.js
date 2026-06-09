@@ -1,47 +1,48 @@
 // Default: open on desktop (≥768px, ≥500px height), closed on mobile.
-// Manual click overrides auto-behavior until breakpoint is crossed.
 
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("nav");
 
-let prevScreenIsDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
-let navOverridden = false;
-
+/**
+ * Adjust nav/menu state with current screen size (open in Desktop, closed in mobile).
+ * @returns {void}
+ */
 function autoSyncNavToScreenSize() {
   if (!menuToggle || !nav) return;
 
   const nowDesktop = window.innerWidth >= 768 && window.innerHeight >= 500;
-
-  if (nowDesktop !== prevScreenIsDesktop) {
-    prevScreenIsDesktop = nowDesktop;
-    navOverridden = false;
-  }
-
-  if (!navOverridden) {
-    menuToggle.classList.toggle("is-open", nowDesktop);
-    nav.classList.toggle("closed", !nowDesktop);
-  }
+  menuToggle.classList.toggle("is-open", nowDesktop); // close menu toggle on mobile, open on desktop
+  nav.classList.toggle("closed", !nowDesktop); // close nav on mobile, open on desktop
 }
 
 document.addEventListener("DOMContentLoaded", autoSyncNavToScreenSize);
 window.addEventListener("resize", autoSyncNavToScreenSize);
 
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    navOverridden = true;
-    menuToggle.classList.toggle("is-open");
-    nav.classList.toggle("closed");
-  });
-}
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("is-open");
+  nav.classList.toggle("closed");
+});
 
 
 // Handle form submission via Web3Forms
 
+/**
+ * Dismiss a toast element (due to CSS animation) and thenremove it from the DOM.
+ * @param {HTMLElement} toast - Toast element to dismiss.
+ * @returns {void}
+ */
 function dismissToast(toast) {
   toast.classList.remove("show");
-  setTimeout(() => toast.remove(), 300);
+  setTimeout(() => toast.remove(), 500);
 }
 
+/**
+ * Create and display a toast message.
+ * @param {string} msg - HTML string to show inside the toast.
+ * @param {'success'|'error'|'sending'|'info'} type - Styling type for the toast.
+ * @param {boolean} [noAutoDismiss=false] - If true, success toasts won't auto-dismiss, made for debugging.
+ * @returns {void}
+ */
 function showToast(msg, type, noAutoDismiss = false) {
   const toast = document.createElement("div");
   toast.className = `toast ${type}`;
@@ -55,7 +56,7 @@ function showToast(msg, type, noAutoDismiss = false) {
   });
   if (type === "success") {
     if (!noAutoDismiss) {
-      setTimeout(() => dismissToast(toast), 4000);
+      setTimeout(() => dismissToast(toast), 3000);
     }
   }
 }
@@ -67,6 +68,12 @@ const form = document.getElementById("contactForm");
 
 
 
+/**
+ * Handle form submission via Web3Forms API.
+ * Prevents default submit, posts JSON payload, and shows toasts for status.
+ * @param {Event} e - Submit event from the form.
+ * @returns {Promise<void>}
+ */
 async function handleSubmit(e) {
   e.preventDefault();
   form.classList.add("submitted");
@@ -76,7 +83,6 @@ async function handleSubmit(e) {
   const json = JSON.stringify(object);
 
   showToast("Sending...", "sending");
-
 
   try {
     const res = await fetch("https://api.web3forms.com/submit", {
@@ -122,6 +128,11 @@ const contactSection = document.getElementById("contact");
 // add more sections
 const navLinks = document.querySelectorAll(".nav-links a");
 
+/**
+ * Toggle visibility of main sections and update active nav link.
+ * @param {string} targetId - ID of the target section (e.g. 'home' or 'contact').
+ * @returns {void}
+ */
 function switchSection(targetId) {
   homeSection.classList.toggle("hidden", targetId !== "home");
   contactSection.classList.toggle("hidden", targetId !== "contact");
@@ -148,6 +159,10 @@ navLinks.forEach((a) => {
 // time
 const timeElement = document.querySelector(".date");
 
+/**
+ * Update the `.date` element with the current localized time and year.
+ * @returns {void}
+ */
 function getTime() {
   const time = new Date();
   timeElement.textContent = time.toLocaleTimeString('en-US', {
