@@ -326,8 +326,15 @@ p.date {
   background: #1e1e2e;
   border: 2px solid #2a2a3eb7;
   max-width: 550px;
+  perspective: 550px;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.editor-body:hover {
+  transform: rotateY(4deg) rotateX(-12deg) rotateZ(5deg) translateX(7px) translateZ(89px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8);
 }
 
 .title-bar {
