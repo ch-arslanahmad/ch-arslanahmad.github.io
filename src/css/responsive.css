@@ -27,6 +27,9 @@
         max-width: 100%;
     }
 
+    .home {
+        padding-left: var(--space-xl);
+    }
 }
 
 @media (max-width: 580px) {
@@ -49,6 +52,5 @@
 
     .home .editor-body {
         width: 100%;
-        +
     }
 }

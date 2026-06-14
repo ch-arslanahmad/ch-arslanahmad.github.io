@@ -208,22 +208,14 @@ function highlight(code) {
   const opStr = /([.,;:=!<>?+\-*/&|])/g;
   const funcStr = /(\b[a-zA-Z_]\w*\b)(?=\()/g;
 
-
   // combine all regex
   const combined = new RegExp(
     `${commentGroup.source}|${strGroup.source}|${numGroup.source}|${kwGroup.source}|${bracketStr.source}|${opStr.source}|${funcStr.source}`,
     'gm'
   );
 
-  // return the code with edited HTML with span tags for each component
-
-  // code.replace(what_to_replace, how_to_replace) where 'how_to_replace' is a function but can be a string as well.
-  // arguments (match, group1, group2, ...): match is the entire matched string, while groupn is the returned string of the nth capturing group in the regex.
-  return code.replace(combined, (match, comment, str, num, kw, bracket, op, func) => {
-  // In our case, we have 7 groups,
-    // we check which matches and wrap it in the span tag with class.
-    // then stylize the span class to distinguish
-
+  // syntax highlight first
+  const highlighted = code.replace(combined, (match, comment, str, num, kw, bracket, op, func) => {
     if (comment) return `<span class="c-comment">${comment}</span>`;
     if (str) return `<span class="c-str">${str}</span>`;
     if (num) return `<span class="c-num">${num}</span>`;
@@ -231,9 +223,18 @@ function highlight(code) {
     if (bracket) return `<span class="c-bracket">${bracket}</span>`;
     if (op) return `<span class="c-rand">${op}</span>`;
     if (func) return `<span class="c-func">${func}</span>`;
-    // within the function, one match will be found and return for each match.
     return match;
   });
+
+  // split into lines with gutter
+  const lines = highlighted.split("\n");
+  const gutter = lines.map((_, i) => `<div>${i + 1}</div>`).join('');
+  const content = lines.map(line => `<div>${line || "&nbsp;"}</div>`).join('');
+
+  return `
+    <div class="gutter">${gutter}</div>
+    <div class="code-content">${content}</div>
+  `;
 }
 
 const heroCode = `const arslan = {

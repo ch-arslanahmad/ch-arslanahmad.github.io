@@ -214,12 +214,16 @@ form#contactForm {
   min-height: 100vh;
   width: 100%;
   position: relative;
-  border-bottom: none;
-  padding: var(--space-md) var(--space-md) 0 var(-- space-2xl);
+  border-bottom: var(--space-md);
+  padding-top: var(--space-md);
+  padding-right: var(--space-md);
+  padding-bottom: 0;
+  padding-left: var(--space-md);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--space-2xl);
+  /* row-gap: var(--space-md);
+  column-gap: var(--space-md); */
 }
 
 .home .hero-content {
@@ -304,7 +308,8 @@ p.date {
 
 
 .code-container {
-  flex: 1;
+  flex: 0.6;
+  max-width: 450px;
   opacity: 0;
   filter: blur(20px);
   animation: cinematicBlur 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -319,21 +324,77 @@ p.date {
 
 .editor-body {
   background: #1e1e2e;
-  border: 3px solid #2a2a3eb7;
-  border-radius: 8px;
-  max-width: 500px;
+  border: 2px solid #2a2a3eb7;
+  max-width: 550px;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   overflow: hidden;
 }
 
+.title-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  padding: 9px 20px 10px;
+  font-family: var(--font-mono);
+  text-transform: lowercase;
+  border-bottom: 2px solid #2a2a3eb7;
+  background: #1e1e27b7;
+  gap: 10px;
+}
+
+.title-bar .title {
+  font-size: var(--text-xs);
+  margin-left: auto;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+}
+
+.dot.red {
+  background: #ff5f56;
+}
+
+.dot.yellow {
+  background: #ffc107;
+}
+
+.dot.orange {
+  background: #fd7e14;
+}
+
+.status-bar {
+  background: #1e1e2e;
+  border-top: 2px solid #2a2a3eb7;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: gray;
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 20px;
+}
+
 .home .code-editor {
+  display: flex;
+  justify-content: center;
   padding: 15px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   color: white;
   overflow-x: auto;
   margin: 0;
   line-height: 1.6;
+}
+
+.code-editor .gutter {
+  margin-right: 15px;
+  color: gray;
+  user-select: none;
+}
+
+.code-editor .code-content {
+  overflow-x: auto;
 }
 
 /* == Syntax Highlighting Colors (VS Code Dark) == */
