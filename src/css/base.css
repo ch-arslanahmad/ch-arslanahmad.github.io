@@ -178,8 +178,12 @@ main {
 }
 
 nav {
-  position: relative;
+  position: sticky;
+  top: 0;
+  /* align-self: flex-start; */
   align-items: center;
+  justify-content: center;
+  height: 100vh;
   background-color: var(--bg-surface);
   flex-shrink: 0;
   width: 230px;

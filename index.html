@@ -29,88 +29,149 @@
         <div class="logo"><img src="src/assets/logo.png" alt="Logo" /></div>
 
         <ul class="nav-links">
-          <li><a class="active" href="#home">Home</a></li>
-          <li><a href="#projects" href="#projects">Showcase</a></li>
-          <li><a href="#contact" href="#contact">Contact</a></li>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#showcase">Showcase</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </nav>
 
+    <div class="sections-wrapper">
 
-    <section id="home" class="home">
+      <section id="home" class="home">
 
-      <p class="date"></p>
+        <p class="date"></p>
 
-      <div class="code-container">
-        <div class="editor-body">
-          <div class="title-bar">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot orange"></div>
-            <div class="title c-func">Code Editor</div>
-          </div>
-          <pre class="code-editor" id="hero-code"></pre>
-          <div class="status-bar">
-            <div>JavaScript</div>
-            <div>Ln 1, Col 1, 10 Lines</div>
+        <div class="code-container">
+          <div class="editor-body">
+            <div class="title-bar">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot orange"></div>
+              <div class="title c-func">Code Editor</div>
+            </div>
+            <pre class="code-editor" id="hero-code"></pre>
+            <div class="status-bar">
+              <div>JavaScript</div>
+              <div>Ln 1, Col 1, 10 Lines</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="hero-content">
-        <h3>I am</h3>
-        <h1><span>Arslan</span> Ahmad</h1>
-        <p class="placeholder-array">A developer
-          <span class="cursor""></span>
-                    </p>
-                  </div>
-    </section>
+        <div class="hero-content">
+          <h3>I am</h3>
+          <h1><span>Arslan</span> Ahmad</h1>
+          <p class="placeholder-array">A developer
+            <span class="cursor"></span>
+          </p>
+        </div>
+      </section>
+      <section class=" test showcase" id="showcase">
+        <h1>Showcase</h1>
+        <div class="showcase-options">
+          <ul>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#ideas">Ideas</a></li>
+            <li><a href="#interests">Interests</a></li>
+          </ul>
+        </div>
 
-    <section class=" contact hidden" id="contact">
-            <h1>Contact Me</h1>
-            <div class="sections-list">
-              <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="2b80c1da-faf3-4bfc-b4c3-8d636675ebc3">
-                <input type="checkbox" name="botcheck" style="display: none;">
+        <div class="projects">
 
-                <label for="name">Name:</label>
-                <input id="name" name="name" type="text" required />
+          <div class="project-item">
+            <img class="project-preview"
+              src="https://raw.githubusercontent.com/ch-arslanahmad/school_management_system_java/main/storage/preview-code.gif"
+              alt="School Management System Preview">
 
-                <label for="email">Email:</label>
-                <input id="email" name="email" type="email" required />
-
-                <label for="subject">Subject:</label>
-                <input id="subject" name="subject" type="text" required />
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <button type="submit">Send Message</button>
-              </form>
-
-              <div class="card-list">
-                <section class="card">
-                  <i class="fa-solid fa-envelope-open accent"></i>
-                  <a class="link" href="mailto:ch.arslanad+portfolio@gmail.com">ch.arslanad@gmail.com</a>
-                </section>
-
-                <section class="card">
-                  <h2>Socials</h2>
-                  <div>
-                    <button type="button" aria-label="GitHub"
-                      onclick="window.open('https://github.com/ch-arslanahmad','_blank')">
-                      <i class="fa-brands fa-github"></i>
-                    </button>
-                    <button type="button" aria-label="LinkedIn"
-                      onclick="window.open('https://www.linkedin.com/in/arslan-ahmad-bb8149377/','_blank')">
-                      <i class="fa-brands fa-linkedin"></i>
-                    </button>
-                  </div>
-                </section>
-              </div>
+            <div class="project-details">
+              <h3 class="project-title">School Management System</h3>
+              <p class="project-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et
+                distinctio quasi cupiditate doloribus minima. Nostrum accusantium quae vitae beatae temporibus,
+                omnis nulla vero voluptas reiciendis voluptate laboriosam vel culpa. Suscipit corporis voluptate
+                perferendis dolor laborum nemo aperiam beatae sit dolorum a, pariatur soluta tenetur facilis ipsum
+                quibusdam dicta molestias modi asperiores nihil vitae, atque delectus iste eligendi? Aliquid
+                molestiae doloremque obcaecati nisi aperiam consequatur voluptas, debitis eos impedit at vero
+                error non architecto, alias blanditiis, aspernatur repellendus exercitationem! Repellendus quas,
+                laboriosam sequi dicta dolorem ad laudantium hic molestias sint quisquam voluptatibus sunt magni
+                dolorum, quia debitis, adipisci necessitatibus consequatur? Ipsa. Lorem ipsum dolor sit, amet
+                consectetur adipisicing elit. Eius,
+                suscipit!</p>
             </div>
-    </section>
+          </div>
+          <div class="project-item">
 
-    </section>
+            <div class="project-details">
+              <h3 class="project-title">Project Title</h3>
+              <p class="project-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius,
+                suscipit!</p>
+            </div>
+          </div>
+          <div class="project-item">
+
+            <div class="project-details">
+              <h3 class="project-title">Project Title</h3>
+              <p class="project-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius,
+                suscipit!</p>
+            </div>
+          </div>
+          <div class="project-item">
+
+            <div class="project-details">
+              <h3 class="project-title">Project Title</h3>
+              <p class="project-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius,
+                suscipit!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class=" contact" id="contact">
+        <h1>Contact Me</h1>
+        <div class="sections-list">
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="2b80c1da-faf3-4bfc-b4c3-8d636675ebc3">
+            <input type="checkbox" name="botcheck" style="display: none;">
+
+            <label for="name">Name:</label>
+            <input id="name" name="name" type="text" required />
+
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email" required />
+
+            <label for="subject">Subject:</label>
+            <input id="subject" name="subject" type="text" required />
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+          </form>
+
+          <div class="card-list">
+            <section class="card">
+              <i class="fa-solid fa-envelope-open accent"></i>
+              <a class="link" href="mailto:ch.arslanad+portfolio@gmail.com">ch.arslanad@gmail.com</a>
+            </section>
+
+            <section class="card">
+              <h2>Socials</h2>
+              <div>
+                <button type="button" aria-label="GitHub"
+                  onclick="window.open('https://github.com/ch-arslanahmad','_blank')">
+                  <i class="fa-brands fa-github"></i>
+                </button>
+                <button type="button" aria-label="LinkedIn"
+                  onclick="window.open('https://www.linkedin.com/in/arslan-ahmad-bb8149377/','_blank')">
+                  <i class="fa-brands fa-linkedin"></i>
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+
+
   </main>
 
   <!-- <footer>

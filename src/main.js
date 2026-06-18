@@ -20,10 +20,10 @@ function autoSyncNavToScreenSize() {
   if (nowDesktop) {
     menuToggle.classList.add("is-open");
     nav.classList.remove("closed");
-  } else {
+    return;
+  }
     menuToggle.classList.remove("is-open");
     nav.classList.add("closed");
-  }
 }
 
 
@@ -136,38 +136,38 @@ if (form) {
 
 // Nav section switching
 
-const homeSection = document.getElementById("home");
-const contactSection = document.getElementById("contact");
+
+const sections = document.querySelectorAll("section[id]");
 // add more sections
 const navLinks = document.querySelectorAll(".nav-links a");
 
-/**
- * Toggle visibility of main sections and update active nav link.
- * @param {string} targetId - ID of the target section (e.g. 'home' or 'contact').
- * @returns {void}
- */
-function switchSection(targetId) {
-  homeSection.classList.toggle("hidden", targetId !== "home");
-  contactSection.classList.toggle("hidden", targetId !== "contact");
-  navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${targetId}`));
-  console.log("switchSection", targetId + " is", "hidden:", contactSection.classList.contains("hidden"));
+// UPDATE active nav link on SCROLL
+const observer = new IntersectionObserver((entries) => { // you recive all entries
+  entries.forEach((entry) => { // loop over each entry
+    if (entry.isIntersecting) { // if the section is in view
+      const id = entry.target.id;
+      navLinks.forEach((a) => { // get all the nav links
+        a.classList.toggle("active", a.getAttribute("href") === `#${id}`); // if the entry id is equal to the nav link
+      });
+    }
+  });
+}, { threshold: 0.3 }); // fires as soon as any part of a section enters the viewport
 
-  if (window.innerWidth < 768) {
-    menuToggle.classList.remove("is-open");
-    nav.classList.add("closed");
-  }
-}
+// observe each section & implement the property of the observer
+sections.forEach((s) => observer.observe(s));
 
+// Move the section to the nav link when clicked (smooth scroll)
 navLinks.forEach((a) => {
   a.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent browser from instantly jumping to the anchor
     const id = a.getAttribute("href").slice(1); // get attribute & removing the #
-    if (id === "home" || id === "contact") {
-      e.preventDefault();
-      switchSection(id);
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    if (window.innerWidth < 768) { // if on mobile close the menu after clicking
+      menuToggle.classList.remove("is-open");
+      nav.classList.add("closed");
     }
   });
 });
-
 
 // time
 const timeElement = document.querySelector(".date");
