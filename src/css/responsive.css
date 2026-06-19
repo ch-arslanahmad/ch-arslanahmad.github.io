@@ -27,7 +27,9 @@
         max-width: 100%;
     }
 
-    .home {
+    .home,
+    .showcase,
+    .contact {
         padding-left: var(--space-xl);
     }
 }
@@ -43,7 +45,9 @@
         grid-template-columns: 1fr;
     }
 
-    .home {
+    .home,
+    .showcase,
+    .contact {
         padding-top: var(--space-xl);
         padding-right: var(--space-md);
         padding-bottom: var(--space-xl);

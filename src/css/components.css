@@ -91,6 +91,13 @@ nav ul.nav-links {
       0 calc(100% - 10px));
 }
 
+.sections-wrapper {
+  flex: 1;
+  /* allow shrink and grow, rather than rigid size, may cause overflow */
+  min-width: 0;
+  /* to prevent overflow, allowing the container & its elements to shrink down to fit the viewport */
+}
+
 form#contactForm {
   display: flex;
   flex-direction: column;
@@ -563,7 +570,7 @@ p.date {
   filter: grayscale(0%);
 }
 
-.project-item .project-details {
+.project-item .details {
   padding: 20px;
 }
 
@@ -572,14 +579,14 @@ p.date {
   z-index: 1;
 }
 
-.project-title {
+.title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.project-description {
+.description {
   font-size: 0.85rem;
   color: var(--text-muted-light);
   line-height: 1.5;
@@ -601,7 +608,8 @@ p.date {
 }
 
 .skills h2,
-.tools h2 {
+.tools h2,
+.ideas h2 {
   margin: var(--space-md) 0;
 }
 
@@ -675,8 +683,78 @@ p.date {
 
 /* ... TOOLS SUBSECTION ** */
 
-.tools {
+.tools,
+.ideas {
   width: 100%;
+}
+
+/* ... IDEAS SUBSECTION ** */
+
+.ideas-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.idea {
+  border: solid var(--border);
+  border-width: 0 0 0 3px;
+  padding: 10px;
+  transition: all var(--transition-normal);
+}
+
+.idea:hover {
+  border-color: var(--accent);
+}
+
+.idea .title {
+  color: white;
+  font-weight: 400;
+}
+
+.idea .description {
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 85%;
+}
+
+.status {
+  margin-top: 10px;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid;
+  clip-path: polygon(0 0,
+      calc(100% - 4px) 0,
+      100% 4px,
+      100% 100%,
+      4px 100%,
+      0 calc(100% - 4px));
+}
+
+.status.idea {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.status.in-progress {
+  color: #4ade80;
+  border-color: #4ade80;
+}
+
+.status.shelved {
+  color: var(--text-muted);
+  border-color: var(--text-muted);
+}
+
+.status.done {
+  color: #c084fc;
+  border-color: #c084fc;
 }
 
 
