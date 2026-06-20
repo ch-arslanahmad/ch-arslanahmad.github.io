@@ -699,12 +699,14 @@ p.date {
 .idea {
   border: solid var(--border);
   border-width: 0 0 0 3px;
-  padding: 10px;
+  padding: 20px;
   transition: all var(--transition-normal);
 }
 
 .idea:hover {
+  text-shadow: none;
   border-color: var(--accent);
+  cursor: pointer;
 }
 
 .idea .title {
@@ -757,6 +759,148 @@ p.date {
   border-color: #c084fc;
 }
 
+
+/* Article SECTIONS of IDEAS/Projects */
+
+.article {
+  display: flex;
+  gap: var(--space-md);
+  width: 100%;
+  min-height: 100vh;
+  padding: var(--space-lg) 0;
+}
+
+a.back-link {
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  align-items: baseline;
+  text-shadow: none;
+  margin: 10px;
+  gap: 10px;
+  background: none;
+  color: gray;
+  transition: all var(--transition-normal);
+  writing-mode: vertical-lr;
+}
+
+.back-link:hover {
+  color: white;
+  text-shadow: none;
+}
+
+.back-link:hover i {
+  color: var(--accent);
+}
+
+.detail-content a {
+  color: var(--accent);
+  font-family: var(--font-italic);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  transition: color var(--transition-normal);
+  text-shadow: none;
+}
+
+.detail-content a:hover {
+  color: white;
+  text-shadow: none;
+}
+
+
+.detail-content {
+  padding: 0 10px 0 0px;
+}
+
+.article .detail-content h1 {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.detail-content blockquote {
+  border-left: 3px solid var(--accent);
+  margin: var(--space-md) 0;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 217, 255, 0.03);
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.article .detail-content h2,
+.article .detail-content h3 {
+  /* font-size: var(--text-xl); */
+  color: var(--text-muted-light);
+  font-weight: 200;
+  margin: var(--space-lg) 0 var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-content p {
+  color: var(--text);
+  font-size: var(--text-sm);
+  line-height: 1.8;
+}
+
+
+.detail-content pre {
+  background: var(--bg-surface);
+  clip-path: polygon(0 0,
+      calc(100% - 6px) 0,
+      100% 6px,
+      100% 100%,
+      6px 100%,
+      0 calc(100% - 6px));
+  padding: 20px;
+}
+
+.detail-content ul,
+.detail-content ol {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 17px;
+}
+
+.detail-content code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  padding: 2px 4px;
+  background: rgba(0, 38, 45, 0.4);
+}
+
+.detail-content pre code {
+  color: var(--text);
+  background: none;
+  padding: 0;
+}
+
+.detail-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: var(--text-sm);
+}
+
+.detail-content th,
+.detail-content td {
+  border: 1px solid var(--border);
+  padding: var(--space-sm);
+  text-align: left;
+}
+
+.detail-content th {
+  background: var(--bg-surface);
+  font-family: var(--font-mono);
+  color: var(--text-muted-light);
+  font-weight: 400;
+}
+
+.detail-content td {
+  color: var(--text-muted);
+}
 
 /* Animations */
 

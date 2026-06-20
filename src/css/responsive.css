@@ -32,6 +32,10 @@
     .contact {
         padding-left: var(--space-xl);
     }
+
+    .detail-content {
+        width: 100%;
+    }
 }
 
 @media (max-width: 580px) {

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="src/css/components.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+
+<body>
+
+    <main>
+        <a class="back-link" href="index.html#showcase"><i class="fas fa-arrow-left"></i>back</a>
+        <div class="article">
+            <div class="detail-content">
+                <!-- Article content will be injected here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const detailContent = document.querySelector('.detail-content');
+
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type') || 'ideas';
+        const id = params.get('id');
+
+
+        createArticle(id, type);
+
+        function createArticle(id, type) {
+
+            fetch(`data/${type}.json`).then(r => r.json()).then(items => {
+                const item = items.find(i => i.id === id);
+
+                if (!item) {
+                    detailContent.innerHTML = '<p>Idea or project cannot be found, :(, </p ><a href="index.html" > Go back</a>';
+
+                    return;
+                }
+
+                // console.log(item.content);
+
+                const title = document.createElement('h1'); // create an element
+                title.textContent = item.title;
+
+                const renderer = new marked.Renderer(); // create a custom renderer
+                renderer.hr = () => ''; // the renderer, remove the hr
+                marked.use({ renderer }); // use the custom renderer in marked
+
+
+                /* ... create a status element */
+                const status = document.createElement('span');
+                status.classList.add('status', item.status.toLowerCase()); // add status class based on item status
+                status.textContent = item.status;
+                // --
+
+                detailContent.innerHTML = marked.parse(title.outerHTML + '\n\n' + status.outerHTML + '\n\n' + item.content);
+                hljs.highlightAll(); // highlight code blocks
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
