@@ -221,14 +221,7 @@ form#contactForm {
   min-height: 100vh;
   width: 100%;
   position: relative;
-  border-bottom: var(--space-md);
-  padding-top: var(--space-md);
-  padding-right: var(--space-md);
-  padding-bottom: 0;
-  padding-left: var(--space-md);
-
-  row-gap: var(--space-md);
-  column-gap: var(--space-md);
+  margin-left: var(--space-md);
 }
 
 
@@ -285,7 +278,6 @@ section.showcase {
   font-size: var(--text-sm);
   color: var(--tag-color, var(--accent));
   border: 1px solid color-mix(in srgb, var(--tag-color, var(--accent)) 30%, transparent);
-  background: color-mix(in srgb, var(--tag-color, var(--accent)) 6%, var(--bg-surface));
   clip-path: var(--clip-notch);
 }
 
@@ -305,9 +297,17 @@ section.showcase {
   padding: 0.2rem 0.6rem;
 }
 
-.tag.status.in-progress { --tag-color: #4ade80; }
-.tag.status.completed { --tag-color: #c084fc; }
-.tag.status.shelved { --tag-color: #8888a0; }
+.tag.status.in-progress {
+  --tag-color: #4ade80;
+}
+
+.tag.status.completed {
+  --tag-color: #c084fc;
+}
+
+.tag.status.shelved {
+  --tag-color: #8888a0;
+}
 
 
 .demo-label {
@@ -488,12 +488,10 @@ p.date {
 .showcase-options {
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  width: fit-content; */
   align-items: center;
-  list-style: none;
-  gap: var(--space-md);
-  padding: var(--space-lg) var(--space-md) 0;
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-xl) 0 0;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -501,8 +499,7 @@ p.date {
 
 .showcase-options ul {
   display: flex;
-  width: fit-content;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   background: var(--bg-surface);
   clip-path: var(--clip-notch-lg);
   padding: var(--space-sm);
@@ -527,7 +524,6 @@ p.date {
   width: 100%;
 }
 
-
 /* ... PROJECT SUBSECTION ** */
 
 .projects {
@@ -539,9 +535,7 @@ p.date {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(306px, 1fr));
-  width: 100%;
-  /* gap: var(--space-lg); */
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 }
 
 .project-item {
@@ -694,19 +688,13 @@ p.date {
 
 /* ... TOOLS SUBSECTION ** */
 
-.tools,
+
 .ideas,
 .skills,
-.projects {
-  min-height: 50vh;
-  width: 100%;
-}
-
-.ideas.active,
-.skills.active,
-.projects.active,
-.tools.active {
+.projects,
+.tools {
   display: flex;
+  flex-direction: column;
 }
 
 /* ... IDEAS SUBSECTION ** */
@@ -829,7 +817,8 @@ a.back-link {
   line-height: 1.8;
 }
 
-.detail-content p img {
+.detail-content p img,
+.detail-content p video {
   padding: 30px 0 0 0;
 }
 

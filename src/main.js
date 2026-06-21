@@ -260,7 +260,7 @@ if (heroEditor) {
   heroEditor.innerHTML = highlight(heroCode);
 }
 
-showToast("Operation in progress", "success", true)
+// showToast("Operation in progress", "success", true)
 
 // == SHOWCASE section ==
 

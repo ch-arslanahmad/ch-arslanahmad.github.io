@@ -193,10 +193,9 @@ main {
 nav {
   position: sticky;
   top: 0;
-  /* align-self: flex-start; */
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 115vh;
   background-color: var(--bg-surface);
   flex-shrink: 0;
   width: 230px;
@@ -219,6 +218,10 @@ nav {
   gap: var(--space-md);
   padding: var(--space-lg) var(--space-2xl);
   border-bottom: 1px solid var(--border);
+}
+
+section {
+  margin: var(--space-lg);
 }
 
 .hidden {
