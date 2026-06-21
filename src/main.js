@@ -151,7 +151,7 @@ const observer = new IntersectionObserver((entries) => { // you recive all entri
       });
     }
   });
-}, { threshold: 0.3 }); // fires as soon as any part of a section enters the viewport
+}, { threshold: 0.1 }); // fires as soon as any part of a section enters the viewport
 
 // observe each section & implement the property of the observer
 sections.forEach((s) => observer.observe(s));
@@ -268,27 +268,45 @@ showToast("Operation in progress", "success", true)
 // ... Showcase section switching (projects, skills, tools, ideas)
 
 const showcase_items = document.querySelectorAll(".showcase-options ul li a");
-const showcase_sections = document.querySelectorAll(".showcase > div"); // all children of showcase (projects, skills, tools, ideas)
+const showcase_sections = document.querySelectorAll(".showcase-items > div"); // all children of showcase (projects, skills, tools, ideas)
 
-showcase_items.forEach((el) => {
-  el.addEventListener("click", (e) => {
-    e.preventDefault();
-    const url = el.getAttribute("href").slice(1);
-    el.classList.toggle("active"); // makes the clicked button into active state
 
-    showcase_items.forEach((item) => {
-      if (item !== el) {
-        item.classList.remove("active"); // remove active state from other buttons
-      }
-    });
 
-    showcase_sections.forEach((s) => {
-      if (s.id === url) {
-        s.classList.add("active");
-        return;
-      }
-        s.classList.remove("active");
-    });
+// for scrolling showcase sections (projects, skills, tools, ideas) and updating active state of the buttons
+const newobserver = new IntersectionObserver((entries) => { // you recive all entries
 
+  entries.forEach((entry) => { // loop over each entry
+
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+
+      showcase_items.forEach((a) => { // get all the showcase buttons
+        a.classList.toggle("active", a.getAttribute("href").slice(1) === id); // if the entry id is equal to the showcase button
+      });
+
+    }
   });
-});
+}, { threshold: 0.3 }); // fires as soon as any part of a section enters the viewport
+
+// observe each showcase section & implement the property of the observer
+showcase_sections.forEach((s) => newobserver.observe(s));
+
+
+
+  showcase_items.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = el.getAttribute("href").slice(1);
+
+      document.getElementById(id).scrollIntoView({behaviour: "smooth"});
+
+      el.classList.toggle("active"); // makes the clicked button into active state
+
+      showcase_items.forEach((item) => {
+        if (item !== el) {
+          item.classList.remove("active"); // remove active state from other buttons
+        }
+      });
+
+    });
+  });
