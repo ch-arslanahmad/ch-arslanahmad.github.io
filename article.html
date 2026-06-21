@@ -22,7 +22,9 @@
 <body>
 
     <main>
-        <a class="back-link" href="index.html#showcase"><i class="fas fa-arrow-left"></i>back</a>
+        <a class="back-link" href="index.html#showcase"
+            onclick="if (window.history.length > 0) { event.preventDefault(); history.back(); }"><i
+                class="fas fa-arrow-left"></i>back</a>
         <div class="article">
             <div class="detail-content">
                 <!-- Article content will be injected here -->
