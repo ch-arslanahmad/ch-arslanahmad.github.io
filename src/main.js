@@ -147,7 +147,7 @@ const observer = new IntersectionObserver((entries) => { // you recive all entri
     if (entry.isIntersecting) { // if the section is in view
       const id = entry.target.id;
       navLinks.forEach((a) => { // get all the nav links
-        a.classList.toggle("active", a.getAttribute("href") === `#${id}`); // if the entry id is equal to the nav link
+        a.classList.toggle("active", a.getAttribute("href").slice(1) === id); // if the entry id is equal to the nav link
       });
     }
   });
@@ -162,6 +162,12 @@ navLinks.forEach((a) => {
     e.preventDefault(); // prevent browser from instantly jumping to the anchor
     const id = a.getAttribute("href").slice(1); // get attribute & removing the #
     document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    navLinks.forEach(l => {
+      if (l !== a) {
+        l.classList.remove("active"); // remove active state from other links
+      }
+    });
+    a.classList.add("active");
     if (window.innerWidth < 768) { // if on mobile close the menu after clicking
       menuToggle.classList.remove("is-open");
       nav.classList.add("closed");
@@ -255,3 +261,34 @@ if (heroEditor) {
 }
 
 showToast("Operation in progress", "success", true)
+
+// == SHOWCASE section ==
+
+
+// ... Showcase section switching (projects, skills, tools, ideas)
+
+const showcase_items = document.querySelectorAll(".showcase-options ul li a");
+const showcase_sections = document.querySelectorAll(".showcase > div"); // all children of showcase (projects, skills, tools, ideas)
+
+showcase_items.forEach((el) => {
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    const url = el.getAttribute("href").slice(1);
+    el.classList.toggle("active"); // makes the clicked button into active state
+
+    showcase_items.forEach((item) => {
+      if (item !== el) {
+        item.classList.remove("active"); // remove active state from other buttons
+      }
+    });
+
+    showcase_sections.forEach((s) => {
+      if (s.id === url) {
+        s.classList.add("active");
+        return;
+      }
+        s.classList.remove("active");
+    });
+
+  });
+});

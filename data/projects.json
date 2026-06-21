@@ -1,0 +1,42 @@
+[
+  {
+    "id": "portfolio",
+    "title": "Portfolio Site",
+    "short": "Personal portfolio built with vanilla HTML/CSS/JS. Markdown-driven articles, dynamic content, no frameworks.",
+    "status": "in-progress",
+    "type": "project",
+    "content": "## Overview\n\nThis is the site you're on right now. Built with plain HTML, CSS, and JavaScript. No React, no build step, no framework of the week.\n\nI wanted to actually understand what I was shipping. Frameworks hide a lot, and thats fine when you know whats underneath. But I didnt, so I went without them.\n\n## Structure\n\n```\nindex.html\narticle.html\nsrc/\n  main.js\n  style.css\n  css/\ndata/\n  ideas.json\n  projects.json\n```\n\nIt loads content from JSON files based on URL params. Markdown gets rendered by marked.js, code blocks get colored by highlight.js. The homepage has a little code editor thing that uses a regex highlighter I wrote myself.\n\nNothing special. But its mine.\n\n[View on GitHub](https://github.com/ch-arslanahmad/ch-arslanahmad.github.io)"
+  },
+  {
+    "id": "kanban-board",
+    "title": "Kanban Board",
+    "short": "Interactive kanban board with drag-and-drop, built with vanilla JS. Learning project that became a real tool.",
+    "status": "completed",
+    "type": "project",
+    "content": "## Overview\n\nA kanban board. Drag columns, add cards, move things around. Built with nothing but vanilla HTML, CSS, and JS.\n\nStarted as a learning project. I wanted to understand how drag-and-drop works without reaching for a library. Turns out the HTML5 Drag and Drop API is finicky but doable. The hard part was making it feel smooth.\n\n## What it does\n\n- Add, edit, delete cards\n- Drag cards between columns\n- Everything saves to localStorage\n- Responsive enough to use on mobile (though I wouldnt want to)\n\n## Why not a framework\n\nSame reason as the portfolio. I was learning and frameworks get in the way of that.\n\n[View on GitHub](https://github.com/ch-arslanahmad/kanban-board)"
+  },
+  {
+    "id": "yolo-rescuesim",
+    "title": "YOLO RescueSim",
+    "short": "Autonomous rescue robot simulation using ROS 2, Gazebo, and YOLOv8 for human detection.",
+    "status": "completed",
+    "type": "project",
+    "content": "## Overview\n\nA TurtleBot3 robot navigating a disaster scene in Gazebo, using YOLOv8 to detect humans and rescue markers.\n\n## How it works\n\n```\nGazebo sim -> camera feed -> YOLOv8 detects people -> robot navigates toward them\n```\n\nThe hard part was getting ROS 2 Jazzy and Gazebo Harmonic to talk to each other properly. The YOLO part was surprisingly straightforward. The navigation part was not.\n\n## Tech\n\n- ROS 2 Jazzy\n- Gazebo Harmonic\n- YOLOv8 nano (lightweight enough to run on the simulated bot)\n- TurtleBot3\n- Python 3.12\n\nIt works in simulation.\n\n[View on GitHub](https://github.com/ch-arslanahmad/YOLO-RescueSim)"
+  },
+  {
+    "id": "school-management-system",
+    "title": "School Management System",
+    "short": "Console-based Java application with SQLite and PDF reports. Full CRUD for students, teachers, classes.",
+    "status": "completed",
+    "type": "project",
+    "content": "## Overview\n\nA console app in Java that manages students, teachers, classes, and subjects. Stores everything in SQLite, spits out PDF reports.\n\n![School Management System Demo](https://raw.githubusercontent.com/ch-arslanahmad/school_management_system_java/main/storage/preview-code.gif)\n\n## What it does\n\nAdd students, assign them to classes, track teachers and subjects. The usual CRUD stuff. The PDF report generation was the interesting part. I learned more about iText than I ever wanted to.\n\n## Tech\n\n- Java (no frameworks, just JDBC)\n- SQLite\n- iText for PDFs\n- java.util.logging\n\n[View on GitHub](https://github.com/ch-arslanahmad/school_management_system_java)"
+  },
+  {
+    "id": "career-counselor-ai",
+    "title": "Career Counselor AI",
+    "short": "Web-based AI career counseling system. Recommends degrees and subjects based on student interests.",
+    "status": "in-progress",
+    "type": "project",
+    "content": "## Overview\n\nA web app that tries to answer the question students always get stuck on: what should I study?\n\nYou tell it your interests, your strengths, your academic background. It recommends degree programs and subjects. Maybe even a road map from where you are to job-ready.\n\n## What I have so far\n\n- Frontend in vanilla HTML/CSS/JS\n- Backend in Python (FastAPI)\n- MySQL for storing profiles and recommendations\n- LLM integration for the actual counseling part\n\nThe project has proper docs. SRS, architecture decisions, sprint tracking. I wanted to practice the whole software engineering pipeline, not just the coding part.\n\n## Status\n\nIts functional but not polished. The LLM part works but the recommendations need tuning. Still deciding whether to keep it as a portfolio piece or actually deploy it.\n\n[View on GitHub](https://github.com/ch-arslanahmad/career-counselor-ai)"
+  }
+]
