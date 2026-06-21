@@ -36,6 +36,22 @@
     .detail-content {
         width: 100%;
     }
+
+    .home,
+    .showcase,
+    .contact {
+        padding-left: var(--space-xl);
+        /* this alone, no stacking */
+    }
+}
+
+@media (max-width: 768px) {
+
+    section,
+    nav {
+        padding: var(--space-md);
+        /* smaller padding all around in mobile view */
+    }
 }
 
 @media (max-width: 580px) {
