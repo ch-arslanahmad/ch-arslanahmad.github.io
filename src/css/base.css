@@ -122,12 +122,7 @@ a.link:hover {
 
 button {
   padding: var(--space-sm) var(--space-md);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
   color: black;
   font-family: var(--font);
@@ -159,12 +154,7 @@ label {
 input,
 textarea {
   background: var(--bg-surface);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
   border: 1px solid var(--border);
   padding: var(--space-sm) var(--space-md);
   color: var(--text-muted);

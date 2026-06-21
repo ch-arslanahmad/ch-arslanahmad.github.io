@@ -83,12 +83,7 @@ nav ul.nav-links {
   width: var(--text-2xl);
   padding: 5px;
   background: var(--accent);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
 }
 
 .sections-wrapper {
@@ -130,12 +125,7 @@ form#contactForm {
   pointer-events: auto;
   right: var(--space-lg);
   transform: translateX(0);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
 }
 
 
@@ -192,12 +182,7 @@ form#contactForm {
   display: flex;
   flex-direction: column;
   background: rgba(18, 18, 26, 0.5);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
   gap: 10px;
   align-items: center;
   justify-content: center;
@@ -285,20 +270,44 @@ section.showcase {
 }
 
 
-.home .placeholder-array {
-  font-family: var(--font-mono);
-  font-size: var(--text-lg);
-  color: var(--text-muted-light);
-  min-height: 1.6em;
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.cursor {
-  display: inline-block;
-  width: 10px;
-  height: 0.01em;
-  background: var(--accent);
-  animation: blink 1s step-start infinite;
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--tag-color, var(--accent));
+  border: 1px solid color-mix(in srgb, var(--tag-color, var(--accent)) 30%, transparent);
+  background: color-mix(in srgb, var(--tag-color, var(--accent)) 6%, var(--bg-surface));
+  clip-path: var(--clip-notch);
 }
+
+.tag::before {
+  content: "◆";
+  color: var(--tag-color, var(--accent));
+  font-size: 0.8em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tag.status {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--text-xs);
+  padding: 0.2rem 0.6rem;
+}
+
+.tag.status.in-progress { --tag-color: #4ade80; }
+.tag.status.completed { --tag-color: #c084fc; }
+.tag.status.shelved { --tag-color: #8888a0; }
 
 
 .demo-label {
@@ -334,7 +343,7 @@ p.date {
   animation-delay: 500ms;
 }
 
-.home .hero-content>.placeholder-array {
+.home .hero-content>.tag-group {
   animation-delay: 800ms;
 }
 
@@ -495,12 +504,7 @@ p.date {
   width: fit-content;
   gap: var(--space-md);
   background: var(--bg-surface);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
   padding: var(--space-sm);
 }
 
@@ -649,12 +653,7 @@ p.date {
 .chip-v2 {
   padding: 10px 15px;
   background: var(--bg-surface);
-  clip-path: polygon(0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px));
+  clip-path: var(--clip-notch-lg);
   font-family: var(--font-mono);
   transform: translateY(-3px);
   font-size: var(--text-sm);
@@ -744,42 +743,7 @@ p.date {
   width: 85%;
 }
 
-.status {
-  margin-top: 10px;
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0.2rem 0.6rem;
-  border: 1px solid;
-  clip-path: polygon(0 0,
-      calc(100% - 4px) 0,
-      100% 4px,
-      100% 100%,
-      4px 100%,
-      0 calc(100% - 4px));
-}
 
-.status.idea {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.status.in-progress {
-  color: #4ade80;
-  border-color: #4ade80;
-}
-
-.status.shelved {
-  color: var(--text-muted);
-  border-color: var(--text-muted);
-}
-
-.status.done {
-  color: #c084fc;
-  border-color: #c084fc;
-}
 
 
 /* Article SECTIONS of IDEAS/Projects */
@@ -872,12 +836,7 @@ a.back-link {
 
 .detail-content pre {
   background: var(--bg-surface);
-  clip-path: polygon(0 0,
-      calc(100% - 6px) 0,
-      100% 6px,
-      100% 100%,
-      6px 100%,
-      0 calc(100% - 6px));
+  clip-path: var(--clip-notch);
   padding: 20px;
 }
 
