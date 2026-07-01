@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Tips</title>
+    <link rel="stylesheet" href="src/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            margin: 20px;
+        }
+
+        div.tip {
+            position: fixed;
+            font-size: 14px;
+            width: 200px;
+            background-color: var(--bg-surface);
+            padding: 15px;
+            border: 1px solid var(--accent);
+            clip-path: var(--clip-notch);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .tip .caption {
+            font-size: var(--text-xxs);
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin-bottom: 5px;
+
+        }
+
+        .tip .title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .tip .desc {
+            font-family: var(--font);
+            font-size: 12px;
+            color: var(--text-muted-light);
+            text-align: justify;
+            margin: 10px 0;
+        }
+
+        .showcase-link {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent);
+            text-decoration: underline;
+            text-transform: lowercase;
+
+            text-underline-offset: 4px;
+            transition: all 0.5s ease;
+
+        }
+
+        .showcase-link:hover {
+            color: white;
+            text-shadow: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="tools-list">
+        <li class="chip" data-type="text"
+            data-content='{"title":"VS Code","desc":"Primary editor, extensions, debugging"}'>
+            VS Code
+        </li>
+        <li class="chip" data-type="text"
+            data-content='{"title":"IntelliJ IDEA","desc":"Java IDE, refactoring, debugging"}'>
+            IntelliJ IDEA
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"Antigravity","desc":"AI coding assistant by Google"}'>
+            Antigravity
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"OpenCode","desc":"AI coding agent platform"}'>
+            OpenCode
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"Charm&#39;s Crush","desc":"Terminal UI framework"}'>
+            Charm's Crush
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"Hermes","desc":"AI agent by Nous Research"}'>
+            Hermes
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"Codex","desc":"AI coding assistant by LobeHub"}'>
+            Codex
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"Neovim","desc":"Modern Vim-based editor"}'>
+            Neovim
+        </li>
+        <li class="chip" data-type="text" data-content='{"title":"SQLite","desc":"Embedded SQL database engine"}'>
+            SQLite
+        </li>
+    </ul>
+
+    <br><br><br><br>
+
+</body>
+
+<script>
+
+    class Tip {
+        constructor({ caption = "", title = "Tip Title", desc = "", linkCaption = "see here", link = "" } = {}) {
+            this.caption = caption;
+            this.title = title;
+            this.desc = desc;
+            this.linkCaption = linkCaption;
+            this.link = link;
+        }
+    }
+
+    class ImgTip {
+        constructor(link) {
+            this.link = link;
+        }
+    }
+
+    function createTip(tip) {
+
+        const tipEl = document.createElement("div");
+        tipEl.classList.add("tip");
+        tipEl.innerHTML = `
+            ${tip.caption ? `<p class="caption">${tip.caption} ↴</p>` : ''}
+            <p class="title">${tip.title}</p>
+            <p class="desc">${tip.desc}</p>
+            ${tip.link ? `<a href="${tip.link}" class="showcase-link">${tip.linkCaption} →</a>` : ''}
+        `;
+        return tipEl;
+    }
+
+    function createImgTip() {
+
+    }
+
+    document.querySelectorAll(".chip").forEach((chip) => {
+        let currentTip = null;
+
+        chip.addEventListener("mouseenter", (e) => {
+
+            const data = JSON.parse(chip.getAttribute("data-content"));
+            const dummyTip = new Tip(data);
+
+            const tipElement = createTip(dummyTip);
+
+            // the currently created tip element is now the current tip
+            currentTip = tipElement;
+
+            // start invisible so we can measure, then fade in
+            tipElement.style.opacity = '0';
+            document.querySelector("body").appendChild(tipElement); // add the element
+
+            const rect = chip.getBoundingClientRect(); // get its cordinates
+
+            tipElement.style.top = rect.bottom + 10 + 'px'; // move it below the chip
+            tipElement.style.left = rect.left + 'px'; // move it to the left of the chip
+
+            const rightEdge = rect.left + tipElement.offsetWidth;
+
+            if (rightEdge > window.innerWidth) {
+                tipElement.style.left = (window.innerWidth - tipElement.offsetWidth - 25) + 'px';
+            }
+
+            if (parseInt(tipElement.style.left) < 25) {
+                tipElement.style.left = '15px';
+            }
+
+            // force reflow then fade in
+            tipElement.getBoundingClientRect();
+            tipElement.style.opacity = '1';
+
+        });
+
+
+        chip.addEventListener("mouseleave", (e) => {
+            // if (!currentTip) return; // if currentTip is null (untouched), do nothing
+
+            const hidingTip = currentTip; // the current is to be hided
+            currentTip = null; // as it would be hidden, we set currentTip to null
+            hidingTip.style.opacity = '0'; // hidingTip will fade out, and then be removed from the DOM
+            hidingTip.addEventListener('transitionend', () => {
+                hidingTip.remove();
+            }, { once: true });
+        });
+    });
+
+
+</script>
+
+</html>
