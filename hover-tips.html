@@ -147,18 +147,44 @@
 
     }
 
+    let leaveTimeout = null; // stores the setTimeout ID, not the duration
+
     document.querySelectorAll(".chip").forEach((chip) => {
         let currentTip = null;
 
         chip.addEventListener("mouseenter", (e) => {
+
+
 
             const data = JSON.parse(chip.getAttribute("data-content"));
             const dummyTip = new Tip(data);
 
             const tipElement = createTip(dummyTip);
 
-            // the currently created tip element is now the current tip
             currentTip = tipElement;
+
+
+            // ? the element is created and listeners are added
+
+            tipElement.addEventListener("mouseenter", () => {
+                // if the mouse enters the tip, we don't want to hide it
+                clearTimeout(leaveTimeout); // clear the leaveTimeout so it doesn't hide the tip
+
+            });
+
+
+            tipElement.addEventListener("mouseleave", () => {
+
+                leaveTimeout = setTimeout(() => {
+                    const hidingTip = currentTip; // the current is to be hided
+                    currentTip = null; // as it would be hidden, we set currentTip to null
+                    hidingTip.style.opacity = '0'; // hidingTip will fade out, and then be removed from the DOM
+
+                    hidingTip.addEventListener('transitionend', () => {
+                        hidingTip.remove();
+                    }, { once: true });
+                }, 300);
+            });
 
             // start invisible so we can measure, then fade in
             tipElement.style.opacity = '0';
@@ -185,20 +211,25 @@
 
         });
 
-
         chip.addEventListener("mouseleave", (e) => {
-            // if (!currentTip) return; // if currentTip is null (untouched), do nothing
 
-            const hidingTip = currentTip; // the current is to be hided
-            currentTip = null; // as it would be hidden, we set currentTip to null
-            hidingTip.style.opacity = '0'; // hidingTip will fade out, and then be removed from the DOM
-            hidingTip.addEventListener('transitionend', () => {
-                hidingTip.remove();
-            }, { once: true });
+            leaveTimeout = setTimeout(() => {
+
+                const hidingTip = currentTip; // the current is to be hided
+                currentTip = null; // as it would be hidden, we set currentTip to null
+                hidingTip.style.opacity = '0'; // hidingTip will fade out, and then be removed from the DOM
+
+                hidingTip.addEventListener('transitionend', () => {
+                    hidingTip.remove();
+                }, { once: true });
+
+            }, 200); // hide after 200ms
+
+
+
         });
+
     });
-
-
 </script>
 
 </html>
