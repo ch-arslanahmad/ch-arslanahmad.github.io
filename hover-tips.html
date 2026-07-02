@@ -55,6 +55,23 @@
             margin: 10px 0;
         }
 
+        div.tip.tip-media {
+            padding: 4px;
+            width: auto;
+        }
+
+        div.tip.tip-media img {
+            display: block;
+            max-width: 320px;
+            max-height: 240px;
+        }
+
+        div.tip.tip-media video {
+            display: block;
+            max-width: 320px;
+            max-height: 240px;
+        }
+
         .showcase-link {
             font-family: var(--font-mono);
             font-size: 13px;
@@ -106,6 +123,9 @@
         <li class="chip" data-type="text" data-content='{"title":"SQLite","desc":"Embedded SQL database engine"}'>
             SQLite
         </li>
+        <li class="chip" data-type="media"
+            data-content='{"media-type":"img","link":"https://github.com/user-attachments/assets/44f22963-bd08-4449-8801-f7fd118d7409"}'>
+            YOLO Rescue SIM</li>
     </ul>
 
     <br><br><br><br>
@@ -124,8 +144,9 @@
         }
     }
 
-    class ImgTip {
-        constructor(link) {
+    class MediaTip {
+        constructor({ "media-type": mediaType, link } = {}) {
+            this.mediaType = mediaType;
             this.link = link;
         }
     }
@@ -143,8 +164,19 @@
         return tipEl;
     }
 
-    function createImgTip() {
-
+    function createMediaTip(mediaTip) {
+        const tipEl = document.createElement("div");
+        tipEl.classList.add("tip", "tip-media");
+        if (!mediaTip.link) {
+            tipEl.innerHTML = '<span style="padding:0.5rem;color:var(--text-muted);">No media yet</span>';
+            return tipEl;
+        }
+        if (mediaTip.mediaType === "video") {
+            tipEl.innerHTML = `<video src="${mediaTip.link}" controls muted autoplay loop></video>`;
+        } else {
+            tipEl.innerHTML = `<img src="${mediaTip.link}" alt="preview" onerror="this.outerHTML='<span style=\\'padding:0.5rem;color:var(--text-muted);\\'>Broken image</span>'" />`;
+        }
+        return tipEl;
     }
 
     let leaveTimeout = null; // stores the setTimeout ID, not the duration
@@ -154,12 +186,17 @@
 
         chip.addEventListener("mouseenter", (e) => {
 
-
-
+            const type = chip.dataset.type;
             const data = JSON.parse(chip.getAttribute("data-content"));
-            const dummyTip = new Tip(data);
+            let tipElement;
 
-            const tipElement = createTip(dummyTip);
+            if (type === "media") {
+                const mediaTip = new MediaTip(data);
+                tipElement = createMediaTip(mediaTip);
+            } else {
+                const dummyTip = new Tip(data);
+                tipElement = createTip(dummyTip);
+            }
 
             currentTip = tipElement;
 
@@ -176,9 +213,10 @@
             tipElement.addEventListener("mouseleave", () => {
 
                 leaveTimeout = setTimeout(() => {
-                    const hidingTip = currentTip; // the current is to be hided
-                    currentTip = null; // as it would be hidden, we set currentTip to null
-                    hidingTip.style.opacity = '0'; // hidingTip will fade out, and then be removed from the DOM
+                    if (!currentTip) return; // already handled by another timeout
+                    const hidingTip = currentTip;
+                    currentTip = null;
+                    hidingTip.style.opacity = '0';
 
                     hidingTip.addEventListener('transitionend', () => {
                         hidingTip.remove();
@@ -215,9 +253,10 @@
 
             leaveTimeout = setTimeout(() => {
 
-                const hidingTip = currentTip; // the current is to be hided
-                currentTip = null; // as it would be hidden, we set currentTip to null
-                hidingTip.style.opacity = '0'; // hidingTip will fade out, and then be removed from the DOM
+                if (!currentTip) return;
+                const hidingTip = currentTip;
+                currentTip = null;
+                hidingTip.style.opacity = '0';
 
                 hidingTip.addEventListener('transitionend', () => {
                     hidingTip.remove();
@@ -229,6 +268,15 @@
 
         });
 
+    });
+
+    // Preload media tip images in background
+    document.querySelectorAll('.chip[data-type="media"]').forEach(chip => {
+        const data = JSON.parse(chip.getAttribute('data-content'));
+        if (data.link) {
+            const img = new Image();
+            img.src = data.link;
+        }
     });
 </script>
 
