@@ -7,6 +7,7 @@
   <title>Personal Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@1,400;1,700&family=JetBrains+Mono&display=swap"
     rel="stylesheet" />
@@ -26,7 +27,7 @@
 
     <nav>
       <div class="menu">
-        <div class="logo"><img src="src/assets/logo.png" alt="Logo" /></div>
+        <div class="logo"><img src="src/assets/logo.png" alt="Logo" width="32" height="32" /></div>
 
         <ul class="nav-links">
           <li><a href="#home" class="active">Home</a></li>
@@ -61,10 +62,15 @@
           <h3>I am</h3>
           <h1><span>Arslan</span> Ahmad</h1>
           <div class="tag-group">
-            <span class="tag" style="--tag-color: var(--accent)">student</span>
-            <span class="tag" style="--tag-color: #f87171">java dev</span>
-            <span class="tag" style="--tag-color: #4ade80">linux user</span>
-            <span class="tag" style="--tag-color: #c084fc">developer</span>
+            <span class="tag" style="--tag-color: var(--accent)" data-type="text"
+              data-content='{"title":"Student","desc":"Doing bachelor of IET"}'>student</span>
+            <span class="tag" style="--tag-color: #f87171" data-type="text"
+              data-content='{"title":"Java Developer","desc":"Console apps, Android, data structures","url":"https://github.com/ch-arslanahmad/school_management_system_java"}'>java
+              dev</span>
+            <span class="tag" style="--tag-color: #4ade80" data-type="text"
+              data-content='{"title":"Linux User","desc":"Arch Linux, daily driver, shell scripting"}'>linux user</span>
+            <span class="tag" style="--tag-color: #c084fc" data-type="text"
+              data-content='{"title":"Developer","desc":"Passionate about creating innovative solutions", "url":"https://github.com/ch-arslanahmad/"}'>developer</span>
           </div>
         </div>
       </section>
@@ -98,9 +104,8 @@
               </a>
               <a class="project-item" href="article.html?type=projects&id=portfolio">
 
-                <img
-                  src="https://private-user-images.githubusercontent.com/218025646/610891901-bc6404af-b481-4f6f-9291-83f614906199.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODIwNjEyMTYsIm5iZiI6MTc4MjA2MDkxNiwicGF0aCI6Ii8yMTgwMjU2NDYvNjEwODkxOTAxLWJjNjQwNGFmLWI0ODEtNGY2Zi05MjkxLTgzZjYxNDkwNjE5OS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNjIxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDYyMVQxNjU1MTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04NmY5ZGI5YTQ2MTcxOWZlNTVhNjc4YTNkNDJlYmUyMDA2Y2VlYTk5N2RmMDQ0N2E4OGFlZWVkNTAwNzUzZTQ2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.tMH3Kx-P55R8qDcEPu9mlDzg0E1tCH-jtGmwYsK8eZY"
-                  alt="" class="project-preview" style="object-position: 82% 20%;">
+                <img src="https://github.com/user-attachments/assets/bc6404af-b481-4f6f-9291-83f614906199"
+                  alt="portfolio-preview" class="project-preview" style="object-position: 82% 20%;">
                 <div class="details">
                   <h3 class="title">Portfolio Site</h3>
                   <p class="description">Vanilla HTML/CSS/JS. Markdown articles, dynamic content, no frameworks.</p>
@@ -118,9 +123,8 @@
               </a>
               <a class="project-item" href="article.html?type=projects&id=kanban-board">
 
-                <img
-                  src="https://private-user-images.githubusercontent.com/218025646/610889586-f6448343-e8d0-439a-b30b-5423d065d71c.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODIwNjA4MDYsIm5iZiI6MTc4MjA2MDUwNiwicGF0aCI6Ii8yMTgwMjU2NDYvNjEwODg5NTg2LWY2NDQ4MzQzLWU4ZDAtNDM5YS1iMzBiLTU0MjNkMDY1ZDcxYy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNjIxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDYyMVQxNjQ4MjZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05OWQwNWVmMDZmODBhYTc5MzY2MzQ5YThlNjJlY2VjNTRiN2Q3ZTVkYWI4ZTYzZTcwZDNkZGQwNDUyMzkxNzc3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.RgNwdMceWBV0UtM0yXNpqW_ahl_Xyb-h2xhLlyawlaI"
-                  alt="" class="project-preview">
+                <img src="https://github.com/user-attachments/assets/f6448343-e8d0-439a-b30b-5423d065d71c"
+                  alt="kanban-board-preview" class="project-preview" style="object-position: 60% 20%;">
                 <div class="details">
                   <h3 class="title">Kanban Board</h3>
                   <p class="description">Drag-and-drop kanban with vanilla JS. HTML5 Drag and Drop, localStorage.</p>
@@ -129,114 +133,158 @@
             </div>
           </div>
 
-          <div class="skills" id="skills">
-            <div class="demo-label">// showcase > skills</div>
+            <div class="skills" id="skills">
+              <div class="demo-label">// showcase > skills</div>
 
-            <h2>Skills</h2>
+              <h2>Skills</h2>
 
-            <div class="skill-group">
-              <h3>Core</h3>
-              <ul class="skills-list">
-                <li class="chip">Java</li>
-                <li class="chip">C++</li>
-                <li class="chip">HTML / CSS</li>
-                <li class="chip">Python</li>
-                <li class="chip">JavaScript</li>
-                <li class="chip">SQL</li>
-                <li class="chip">Bash</li>
-                <li class="chip">Version Control</li>
-                <li class="chip">Linux</li>
+              <div class="skill-group">
+                <h3>Core</h3>
+                <ul class="skills-list">
+                  <li class="chip" data-type="text"
+                    data-content='{"title":"Java","desc":"Object-oriented programming, Java fundamentals", "link": "https://github.com/ch-arslanahmad/java-oop-exercises"}'>
+                    Java</li>
+                  <li class="chip" data-type="text" data-content='{"title":"C++","desc":"System programming, STL"}'>C++
+                  </li>
+                  <li class="chip" data-type="text"
+                    data-content='{"title":"HTML / CSS","desc":"Semantic markup, responsive design, self-evident site"}'>
+                    HTML / CSS</li>
+                  <li class="chip" data-type="text"
+                    data-content='{"title":"Python","desc":"Scripting, automation, data analysis", "link": ""}'>Python
+                  </li>
+                  <li class="chip" data-type="text"
+                    data-content='{"title":"JavaScript","desc":"Frontend, Node.js, DOM", "link": ""}'>
+                    JavaScript</li>
+                  <li class="chip" data-type="text"
+                    data-content='{"title":"SQL","desc":"Relational databases, queries, optimization"}'>SQL</li>
+                  <li class="chip" data-type="media" data-content='{"media-type": "image", "link": ""}'>Bash</li>
+                  <li class="chip" data-type="media" data-content='{"media-type": "image", "link": ""}'>Version
+                    Control</li>
+                  <li class="chip" data-type="text"
+                    data-content='{"title":"Linux","desc":"Arch Linux, system admin, daily driver"}'>Linux</li>
 
+                </ul>
+              </div>
+
+              <div class="skill-group">
+                <h3>Exploring</h3>
+                <ul class="skills-list">
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"AI Infrastructure","desc":"LLM tooling, agents, MCP servers", "link": "https://github.com/ch-arslanahmad/ai-playbook/"}'>
+                    AI
+                    Infrastructure / Tooling</li>
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"PostgreSQL","desc":"Relational databases, pgvector, performance"}'>PostgreSQL
+                    / Vector DBs</li>
+                  <li class="chip-v2" data-type="media" data-content='{"media-type": "image", "link": ""}'>TypeScript</li>
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"React","desc":"UI components, hooks, state management"}'>React</li>
+                  <li class="chip-v2" data-type="media" data-content='{"media-type": "image", "link": ""}'>n8n</li>
+                </ul>
+              </div>
+
+              <div class="skill-group">
+                <h3>Curious About</h3>
+                <ul class="skills-list">
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"Dart / Flutter","desc":"Cross-platform mobile development"}'>Dart / Flutter
+                  </li>
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"Browser Extensions","desc":"Web extensions, Chrome APIs"}'>Browser Extensions
+                  </li>
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"Docker","desc":"Containers, images, compose"}'>Docker</li>
+                  <li class="chip-v2" data-type="text"
+                    data-content='{"title":"Web Design","desc":"UI/UX, accessibility, design systems, as evident in this website"}'>
+                    Web Design</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="tools" id="tools">
+              <div class="demo-label">// showcase > tools</div>
+
+              <h2>Tools</h2>
+
+              <ul class="tools-list">
+                <li class="chip" data-type="text"
+                  data-content='{"title":"VS Code","desc":"Primary editor, extensions, debugging"}'>
+                  <img class="tool-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt=""> VS Code
+                </li>
+                <li class="chip" data-type="text"
+                  data-content='{"title":"IntelliJ IDEA","desc":"Java IDE, refactoring, debugging"}'>
+                  <img class="tool-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="">
+                  IntelliJ IDEA
+                </li>
+                <li class="chip" data-type="text"
+                  data-content='{"title":"Antigravity","desc":"AI coding assistant by Google"}'>
+                  <img class="tool-icon" src="https://favicool.com/api/icon?domain=antigravity.google"
+                    alt="antigravity"> Antigravity
+                </li>
+                <li class="chip" data-type="text"
+                  data-content='{"title":"OpenCode","desc":"Opensource AI coding agent platform"}'>
+                  <img class="tool-icon"
+                    src="https://media.licdn.com/dms/image/v2/D4D0BAQFJMzzCNacJ9A/company-logo_200_200/B4DZnKXK2mHsAM-/0/1760036695735?e=2147483647&v=beta&t=FutmMxdZErSSxb70NqSy5JB7f-gggnm0mz871Ik3L1s"
+                    alt=""> OpenCode
+                </li>
+                <li class="chip" data-type="text"
+                  data-content='{"title":"Charm&#39;s Crush","desc":"Terminal AI framework"}'>
+                  <img class="tool-icon" src="https://avatars.githubusercontent.com/u/57376114" alt="charm's-crush">
+                  Charm's Crush
+                </li>
+                <li class="chip" data-type="text" data-content='{"title":"Hermes","desc":"AI agent by Nous Research"}'>
+                  <img class="tool-icon" src="https://hermes-agent.nousresearch.com/docs/img/logo.png"
+                    alt="hermes-agent"> Hermes
+                </li>
+                <li class="chip" data-type="text"
+                  data-content='{"title":"Codex","desc":"AI coding assistant by OpenAI"}'>
+                  <img class="tool-icon"
+                    src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/codex-color.png"
+                    alt=""> Codex
+                </li>
+                <li class="chip" data-type="text" data-content='{"title":"Neovim","desc":"Modern Vim-based editor"}'>
+                  <img class="tool-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neovim/neovim-original.svg" alt=""> Neovim
+                </li>
+                <li class="chip" data-type="text"
+                  data-content='{"title":"SQLite","desc":"Embedded SQL database engine"}'>
+                  <img class="tool-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt=""> SQLite
+                </li>
               </ul>
             </div>
 
-            <div class="skill-group">
-              <h3>Exploring</h3>
-              <ul class="skills-list">
-                <li class="chip-v2">AI Infrastructure / Tooling</li>
-                <li class="chip-v2">PostgreSQL / Vector DBs</li>
+            <div class="ideas" id="ideas">
 
-                <li class="chip-v2">TypeScript</li>
-                <li class="chip-v2">React</li>
-                <li class="chip-v2">n8n</li>
-              </ul>
-            </div>
+              <div class="demo-label">// showcase > ideas</div>
 
-            <div class="skill-group">
-              <h3>Curious About</h3>
-              <ul class="skills-list">
-                <li class="chip-v2">Dart / Flutter</li>
-                <li class="chip-v2">Browser Extensions</li>
-                <li class="chip-v2">Docker</li>
-                <li class="chip-v2">Web Design</li>
-              </ul>
-            </div>
-          </div>
+              <h2>Ideas</h2>
 
-          <div class="tools" id="tools">
-            <div class="demo-label">// showcase > tools</div>
+              <div class="ideas-list">
 
-            <h2>Tools</h2>
+                <a class="idea" href="article.html?id=pods">
+                  <h3 class="title">Pods — Memory Server</h3>
+                  <p class="description">Cross-platform memory server or suite of tools for AI agents & Web LLMs alike.
+                  </p>
+                  <span class="tag status in-progress">IN PROGRESS</span>
+                </a>
 
-            <ul class="tools-list">
-              <li class="chip"><img class="tool-icon"
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt=""> VS Code
-              </li>
-              <li class="chip"><img class="tool-icon"
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="">
-                IntelliJ
-                IDEA</li>
-              <li class="chip"><img class="tool-icon" src="https://favicool.com/api/icon?domain=antigravity.google"
-                  alt="antigravity" alt=""> Antigravity</li>
-              <li class="chip"><img class="tool-icon"
-                  src="https://media.licdn.com/dms/image/v2/D4D0BAQFJMzzCNacJ9A/company-logo_200_200/B4DZnKXK2mHsAM-/0/1760036695735?e=2147483647&v=beta&t=FutmMxdZErSSxb70NqSy5JB7f-gggnm0mz871Ik3L1s"
-                  alt=""> OpenCode</li>
-              <li class="chip"><img class="tool-icon" src="https://avatars.githubusercontent.com/u/57376114"
-                  alt="charm's-crush">
-                Charm's Crush</li>
-              <li class="chip"><img class="tool-icon" src="https://hermes-agent.nousresearch.com/docs/img/logo.png"
-                  alt="hermes-agent" alt=""> Hermes</li>
-              <li class="chip"><img class="tool-icon"
-                  src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/codex-color.png"
-                  alt=""> Codex</li>
-              <li class="chip"><img class="tool-icon"
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neovim/neovim-original.svg" alt=""> Neovim
-              </li>
-              <li class="chip"><img class="tool-icon"
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt=""> SQLite
-              </li>
-            </ul>
-          </div>
+                <a class="idea" href="article.html?id=bolt-launcher">
+                  <h3 class="title">Bolt</h3>
+                  <p class="description">a desktop launcher, allowing plugin architecture for operations like file
+                    search, calculator, AI, and custom
+                    extensions. Modular architecture, i.e., swap the frontend without
+                    touching the
+                    backend. </p>
+                  <span class="tag status shelved">SHELVED</span>
+                </a>
 
-          <div class="ideas" id="ideas">
-
-            <div class="demo-label">// showcase > ideas</div>
-
-            <h2>Ideas</h2>
-
-            <div class="ideas-list">
-
-              <a class="idea" href="article.html?id=pods">
-                <h3 class="title">Pods — Memory Server</h3>
-                <p class="description">Cross-platform memory server or suite of tools for AI agents & Web LLMs alike.
-                </p>
-                <span class="tag status in-progress">IN PROGRESS</span>
-              </a>
-
-              <a class="idea" href="article.html?id=bolt-launcher">
-                <h3 class="title">Bolt</h3>
-                <p class="description">a desktop launcher, allowing plugin architecture for operations like file
-                  search, calculator, AI, and custom
-                  extensions. Modular architecture, i.e., swap the frontend without
-                  touching the
-                  backend. </p>
-                <span class="tag status shelved">SHELVED</span>
-              </a>
+              </div>
 
             </div>
-
-          </div>
-        </div>
       </section>
 
       <section class=" contact" id="contact">

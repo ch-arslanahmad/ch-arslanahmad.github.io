@@ -196,6 +196,74 @@ form#contactForm {
   border-color: var(--accent);
 }
 
+/* == Tooltip / Tips == */
+
+div.tip {
+  position: fixed;
+  font-size: 14px;
+  width: 200px;
+  background-color: var(--bg-surface);
+  padding: 15px;
+  border: 1px solid var(--accent);
+  clip-path: var(--clip-notch);
+  opacity: 1;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.tip .caption {
+  font-size: var(--text-xxs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 5px;
+}
+
+.tip .title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.tip .desc {
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--text-muted-light);
+  text-align: justify;
+  margin: 10px 0;
+}
+
+div.tip.tip-media {
+  padding: 4px;
+  width: auto;
+}
+
+div.tip.tip-media img {
+  display: block;
+  max-width: 320px;
+  max-height: 240px;
+}
+
+div.tip.tip-media video {
+  display: block;
+  max-width: 320px;
+  max-height: 240px;
+}
+
+.showcase-link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: underline;
+  text-transform: lowercase;
+  text-underline-offset: 4px;
+  transition: all 0.5s ease;
+}
+
+.showcase-link:hover {
+  color: white;
+  text-shadow: none;
+}
+
 .card i {
   font-size: var(--text-xl);
 }

@@ -298,15 +298,139 @@ showcase_sections.forEach((s) => newobserver.observe(s));
       e.preventDefault();
       const id = el.getAttribute("href").slice(1);
 
-      document.getElementById(id).scrollIntoView({behaviour: "smooth"});
-
-      el.classList.toggle("active"); // makes the clicked button into active state
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
 
       showcase_items.forEach((item) => {
-        if (item !== el) {
-          item.classList.remove("active"); // remove active state from other buttons
-        }
+        item.classList.remove("active");
       });
+      el.classList.add("active");
 
     });
   });
+
+// == Tooltip / Tips ==
+
+class Tip {
+  constructor({ caption = "", title = "Tip Title", desc = "", linkCaption = "see here", link = "", url = "" } = {}) {
+    this.caption = caption;
+    this.title = title;
+    this.desc = desc;
+    this.linkCaption = linkCaption;
+    this.link = link || url;
+  }
+}
+
+class MediaTip {
+  constructor({ "media-type": mediaType, link } = {}) {
+    this.mediaType = mediaType;
+    this.link = link;
+  }
+}
+
+function createTip(tip) {
+  const tipEl = document.createElement("div");
+  tipEl.classList.add("tip");
+  tipEl.innerHTML = `
+    ${tip.caption ? `<p class="caption">${tip.caption} ↴</p>` : ''}
+    <p class="title">${tip.title}</p>
+    <p class="desc">${tip.desc}</p>
+    ${tip.link ? `<a href="${tip.link}" class="showcase-link">${tip.linkCaption} →</a>` : ''}
+  `;
+  return tipEl;
+}
+
+function createMediaTip(mediaTip) {
+  const tipEl = document.createElement("div");
+  tipEl.classList.add("tip", "tip-media");
+  if (!mediaTip.link) {
+    tipEl.innerHTML = '<span style="padding:0.5rem;color:var(--text-muted);">No media yet</span>';
+    return tipEl;
+  }
+  if (mediaTip.mediaType === "video") {
+    tipEl.innerHTML = `<video src="${mediaTip.link}" controls muted autoplay loop></video>`;
+  } else {
+    tipEl.innerHTML = `<img src="${mediaTip.link}" alt="preview" onerror="this.outerHTML='<span style=\\'padding:0.5rem;color:var(--text-muted);\\'>Broken image</span>'" />`;
+  }
+  return tipEl;
+}
+
+let leaveTimeout = null;
+
+document.querySelectorAll(".chip, .chip-v2, .tag").forEach((chip) => {
+  let currentTip = null;
+
+  chip.addEventListener("mouseenter", (e) => {
+    // Remove any existing tips to prevent duplicates
+    document.querySelectorAll("div.tip").forEach(t => t.remove());
+    clearTimeout(leaveTimeout);
+    const type = chip.dataset.type;
+    const data = JSON.parse(chip.getAttribute("data-content"));
+    let tipElement;
+
+    if (type === "media") {
+      const mediaTip = new MediaTip(data);
+      tipElement = createMediaTip(mediaTip);
+    } else {
+      const dummyTip = new Tip(data);
+      tipElement = createTip(dummyTip);
+    }
+
+    currentTip = tipElement;
+
+    tipElement.addEventListener("mouseenter", () => {
+      clearTimeout(leaveTimeout);
+    });
+
+    tipElement.addEventListener("mouseleave", () => {
+      leaveTimeout = setTimeout(() => {
+        if (!currentTip) return;
+        const hidingTip = currentTip;
+        currentTip = null;
+        hidingTip.style.opacity = '0';
+        hidingTip.addEventListener('transitionend', () => {
+          hidingTip.remove();
+        }, { once: true });
+      }, 300);
+    });
+
+    tipElement.style.opacity = '0';
+    document.querySelector("body").appendChild(tipElement);
+
+    const rect = chip.getBoundingClientRect();
+    tipElement.style.top = rect.bottom + 10 + 'px';
+    tipElement.style.left = rect.left + 'px';
+
+    const rightEdge = rect.left + tipElement.offsetWidth;
+    if (rightEdge > window.innerWidth) {
+      tipElement.style.left = (window.innerWidth - tipElement.offsetWidth - 25) + 'px';
+    }
+
+    if (parseInt(tipElement.style.left) < 25) {
+      tipElement.style.left = '15px';
+    }
+
+    tipElement.getBoundingClientRect();
+    tipElement.style.opacity = '1';
+  });
+
+  chip.addEventListener("mouseleave", (e) => {
+    leaveTimeout = setTimeout(() => {
+      if (!currentTip) return;
+      const hidingTip = currentTip;
+      currentTip = null;
+      hidingTip.style.opacity = '0';
+      hidingTip.addEventListener('transitionend', () => {
+        hidingTip.remove();
+      }, { once: true });
+    }, 200);
+  });
+});
+
+// Preload media tip images in background
+document.querySelectorAll('.chip[data-type="media"]').forEach(chip => {
+  const data = JSON.parse(chip.getAttribute('data-content'));
+  if (data.link) {
+    const img = new Image();
+    img.src = data.link;
+  }
+});
